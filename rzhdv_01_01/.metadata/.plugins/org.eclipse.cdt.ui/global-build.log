@@ -1,0 +1,119 @@
+12:51:30 **** Incremental Build of configuration Debug for project rzhdv_01_01 ****
+make all 
+'Building file: ../tests/test_global_runner.c'
+'Invoking: MCU GCC Compiler'
+C:\workspace\ac6_mars_workspace\l476workspace\fromcube\rzhdv\rzhdv_01_01\rzhdv_01_01\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -D__weak="__attribute__((weak))" -D__packed="__attribute__((__packed__))" -DUSE_HAL_DRIVER -DSTM32L476xx -I"C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc" -I"C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Drivers/STM32L4xx_HAL_Driver/Inc" -I"C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Drivers/STM32L4xx_HAL_Driver/Inc/Legacy" -I"C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F" -I"C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Middlewares/ST/STM32_USB_Device_Library/Core/Inc" -I"C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Middlewares/Third_Party/FreeRTOS/Source/include" -I"C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS" -I"C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Drivers/CMSIS/Include" -I"C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Drivers/CMSIS/Device/ST/STM32L4xx/Include" -I"C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc"  -O0 -g3 -Wall -fmessage-length=0 -ffunction-sections -fdata-sections -c -fmessage-length=0 -MMD -MP -MF"tests/test_global_runner.d" -MT"tests/test_global_runner.o" -o "tests/test_global_runner.o" "../tests/test_global_runner.c"
+../tests/test_global_runner.c: In function 'main':
+../tests/test_global_runner.c:203:14: warning: implicit declaration of function 'test_frame_ring_buffer_initialization' [-Wimplicit-function-declaration]
+     RUN_TEST(test_frame_ring_buffer_initialization, 8);
+              ^
+../tests/test_global_runner.c:11:7: note: in definition of macro 'RUN_TEST'
+       TestFunc(); \
+       ^
+../tests/test_global_runner.c:204:14: warning: implicit declaration of function 'test_frame_ring_buffer_push' [-Wimplicit-function-declaration]
+     RUN_TEST(test_frame_ring_buffer_push, 13);
+              ^
+../tests/test_global_runner.c:11:7: note: in definition of macro 'RUN_TEST'
+       TestFunc(); \
+       ^
+../tests/test_global_runner.c:205:14: warning: implicit declaration of function 'test_frame_ring_buffer_pop' [-Wimplicit-function-declaration]
+     RUN_TEST(test_frame_ring_buffer_pop, 36);
+              ^
+../tests/test_global_runner.c:11:7: note: in definition of macro 'RUN_TEST'
+       TestFunc(); \
+       ^
+../tests/test_global_runner.c:211:14: warning: implicit declaration of function 'test_ecg_ring_buffer_initialization' [-Wimplicit-function-declaration]
+     RUN_TEST(test_ecg_ring_buffer_initialization, 9);
+              ^
+../tests/test_global_runner.c:11:7: note: in definition of macro 'RUN_TEST'
+       TestFunc(); \
+       ^
+../tests/test_global_runner.c:212:14: warning: implicit declaration of function 'test_ecg_ring_buffer_push' [-Wimplicit-function-declaration]
+     RUN_TEST(test_ecg_ring_buffer_push, 14);
+              ^
+../tests/test_global_runner.c:11:7: note: in definition of macro 'RUN_TEST'
+       TestFunc(); \
+       ^
+../tests/test_global_runner.c:213:14: warning: implicit declaration of function 'test_ecg_ring_buffer_pop' [-Wimplicit-function-declaration]
+     RUN_TEST(test_ecg_ring_buffer_pop, 46);
+              ^
+../tests/test_global_runner.c:11:7: note: in definition of macro 'RUN_TEST'
+       TestFunc(); \
+       ^
+../tests/test_global_runner.c:225:43: warning: pointer targets in passing argument 2 of 'USBD_HID_SendReport' differ in signedness [-Wpointer-sign]
+         USBD_HID_SendReport(&USBD_Device, message, strlen(message));
+                                           ^
+In file included from C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/main.h:56:0,
+                 from ../tests/test_global_runner.c:22:
+C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc/usbd_hid.h:131:9: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ uint8_t USBD_HID_SendReport (USBD_HandleTypeDef *pdev, 
+         ^
+../tests/test_global_runner.c:230:43: warning: pointer targets in passing argument 2 of 'USBD_HID_SendReport' differ in signedness [-Wpointer-sign]
+         USBD_HID_SendReport(&USBD_Device, message, strlen(message));
+                                           ^
+In file included from C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/main.h:56:0,
+                 from ../tests/test_global_runner.c:22:
+C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc/usbd_hid.h:131:9: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ uint8_t USBD_HID_SendReport (USBD_HandleTypeDef *pdev, 
+         ^
+In file included from C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/adas1000_get_save_frame.h:6:0,
+                 from ../tests/test_global_runner.c:43:
+../tests/test_global_runner.c: At top level:
+C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/adas1000.h:16:17: warning: 'frame' defined but not used [-Wunused-variable]
+ static uint32_t frame[FRAME_LENGTH];
+                 ^
+In file included from ../tests/test_global_runner.c:44:0:
+C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/timer250hz.h:9:17: warning: 'timer250hz_tick' defined but not used [-Wunused-variable]
+ static uint32_t timer250hz_tick;
+                 ^
+C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/timer250hz.h:12:20: warning: 'timer250hz_increment_tick' declared 'static' but never defined [-Wunused-function]
+ static inline void timer250hz_increment_tick();
+                    ^
+In file included from C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/frame_ring_buffer_task.h:12:0,
+                 from ../tests/test_global_runner.c:47:
+C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/frame_ring_buffer.h:11:17: warning: 'received_frames_counter' defined but not used [-Wunused-variable]
+ static uint32_t received_frames_counter;
+                 ^
+In file included from ../tests/test_global_runner.c:46:0:
+C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/ecg_ring_buffer.h:9:17: warning: 'received_ecg_samples_counter' defined but not used [-Wunused-variable]
+ static uint32_t received_ecg_samples_counter;
+                 ^
+C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/ecg_ring_buffer.h:11:17: warning: 'ecg_ring_buffer' defined but not used [-Wunused-variable]
+ static uint32_t ecg_ring_buffer[ECGBUFFERLENGTH];
+                 ^
+C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/ecg_ring_buffer.h:12:17: warning: 'current_ecg_push_index' defined but not used [-Wunused-variable]
+ static uint32_t current_ecg_push_index;
+                 ^
+C:/workspace/ac6_mars_workspace/l476workspace/fromcube/rzhdv/rzhdv_01_01/rzhdv_01_01/Inc/ecg_ring_buffer.h:13:17: warning: 'current_ecg_pop_index' defined but not used [-Wunused-variable]
+ static uint32_t current_ecg_pop_index;
+                 ^
+'Finished building: ../tests/test_global_runner.c'
+' '
+'Building target: rzhdv_01_01.elf'
+'Invoking: MCU GCC Linker'
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32L476VGTx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -lm -o "rzhdv_01_01.elf" @"objects.list"  
+'Finished building target: rzhdv_01_01.elf'
+' '
+make --no-print-directory post-build
+'Generating binary and Printing size information:'
+arm-none-eabi-objcopy -O binary "rzhdv_01_01.elf" "rzhdv_01_01.bin"
+arm-none-eabi-size "rzhdv_01_01.elf"
+   text	   data	    bss	    dec	    hex	filename
+  49296	    360	   6224	  55880	   da48	rzhdv_01_01.elf
+' '
+12:51:59 **** Incremental Build of configuration Debug for project rzhdv_01_01 ****
+make all 
+make: Nothing to be done for `all'.
+11:49:50 **** Incremental Build of configuration Debug for project rzhdv_01_01 ****
+make all 
+make: Nothing to be done for `all'.
+11:55:03 **** Incremental Build of configuration Debug for project rzhdv_01_01 ****
+make all 
+make: Nothing to be done for `all'.
+12:01:47 **** Incremental Build of configuration Debug for project rzhdv_01_01 ****
+make all 
+make: Nothing to be done for `all'.
+12:03:38 **** Incremental Build of configuration Debug for project rzhdv_01_01 ****
+make all 
+make: Nothing to be done for `all'.
