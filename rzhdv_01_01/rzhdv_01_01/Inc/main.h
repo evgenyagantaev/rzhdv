@@ -55,6 +55,9 @@
 #include "usbd_desc.h"
 #include "usbd_hid.h" 
 
+
+#include "acc_data_read_task.h"
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 

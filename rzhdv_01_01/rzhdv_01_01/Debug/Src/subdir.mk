@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Src/acc_data_read_task.c \
 ../Src/acc_spi_low_level.c \
 ../Src/adas1000.c \
 ../Src/adas1000_get_save_frame.c \
@@ -17,6 +18,7 @@ C_SRCS += \
 ../Src/gpio.c \
 ../Src/iwdg.c \
 ../Src/putchar.c \
+../Src/smb380.c \
 ../Src/spi.c \
 ../Src/spi_low_level.c \
 ../Src/stm32l4xx_hal_msp.c \
@@ -30,6 +32,7 @@ C_SRCS += \
 ../Src/usbd_desc.c 
 
 OBJS += \
+./Src/acc_data_read_task.o \
 ./Src/acc_spi_low_level.o \
 ./Src/adas1000.o \
 ./Src/adas1000_get_save_frame.o \
@@ -43,6 +46,7 @@ OBJS += \
 ./Src/gpio.o \
 ./Src/iwdg.o \
 ./Src/putchar.o \
+./Src/smb380.o \
 ./Src/spi.o \
 ./Src/spi_low_level.o \
 ./Src/stm32l4xx_hal_msp.o \
@@ -56,6 +60,7 @@ OBJS += \
 ./Src/usbd_desc.o 
 
 C_DEPS += \
+./Src/acc_data_read_task.d \
 ./Src/acc_spi_low_level.d \
 ./Src/adas1000.d \
 ./Src/adas1000_get_save_frame.d \
@@ -69,6 +74,7 @@ C_DEPS += \
 ./Src/gpio.d \
 ./Src/iwdg.d \
 ./Src/putchar.d \
+./Src/smb380.d \
 ./Src/spi.d \
 ./Src/spi_low_level.d \
 ./Src/stm32l4xx_hal_msp.d \

@@ -45,6 +45,7 @@
 #include "frame_ring_buffer.h"
 #include "ecg_ring_buffer.h"
 #include "frame_ring_buffer_task.h"
+#include "acc_data_read_task.h"
 // here code to test
 //#include "ProductionCode.h"
 
@@ -218,7 +219,7 @@ int main(void)
     char message[64];
     int counter = 0;
 
-    //*
+    /*
     while (1)
     {
         sprintf(message, "c%dp%03dm%dv%03dG\r\n", counter%4, 75-3+(counter%7), counter%10, 80+(counter%6));
@@ -239,7 +240,8 @@ int main(void)
 	configure_adas1000();
     while(1)
     {
-        frame_ring_buffer_task();
+        //frame_ring_buffer_task();
+		acc_data_read_task();
     }
     //return (UnityEnd());
 }
