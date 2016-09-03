@@ -61,6 +61,7 @@ uint16_t acc_spi_write_2byte_word(uint16_t word16)
 	while ((SPI2->SR & SPI_SR_TXE) == RESET );
 	SPI2->DR = word16; // send
 
+
 	// wait while a transmission complete
 	while ((SPI2->SR & SPI_SR_RXNE) == RESET );
 	in_data = SPI2->DR; // read

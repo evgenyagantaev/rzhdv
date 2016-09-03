@@ -54,6 +54,7 @@
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 SPI_HandleTypeDef hspi1;
+SPI_HandleTypeDef hspi2;
 USBD_HandleTypeDef USBD_Device;
 extern PCD_HandleTypeDef hpcd;
 extern USBD_DescriptorsTypeDef HID_Desc;
@@ -132,6 +133,7 @@ int main(void)
     MX_CRC_Init();
     MX_IWDG_Init();
     MX_SPI1_Init();
+    MX_SPI2_Init();
     MX_TIM1_Init();
     MX_TIM2_Init();
     MX_TIM3_Init();
@@ -157,7 +159,8 @@ int main(void)
 	HAL_Delay(10);
     // enable spi1
     SPI1->CR1 |= SPI_CR1_SPE;
-
+    // enable spi1
+    SPI2->CR1 |= SPI_CR1_SPE;
     /*
     configure_adas1000();
     HAL_Delay(3000);
