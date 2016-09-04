@@ -16,8 +16,28 @@ void acc_data_read_task()
 {
 	//debug
 	uint8_t accelerometer_data[16];
+	int16_t rawX=0, rawY=0, rawZ=0;
+	int16_t rawT=0;
+	uint8_t lsb;
 
 	smb380_read_xyz_rawdata(accelerometer_data);
+
+	rawX = accelerometer_data[1]; rawX <<= 8; lsb = accelerometer_data[0] & 0xC0;
+	rawX += lsb;
+	rawX /= 64;     // >> 6
+
+	rawY = accelerometer_data[3]; rawY <<= 8; lsb = accelerometer_data[2] & 0xC0;
+	rawY += lsb;
+	rawY /= 64;     // >> 6
+
+	rawZ = accelerometer_data[5]; rawZ <<= 8; lsb = accelerometer_data[4] & 0xC0;
+	rawZ += lsb;
+	rawZ /= 64;     // >> 6
+
+	rawT=accelerometer_data[6];
+	rawT=(rawT>>1) - 30;
+
+	lsb =0;
 
 	//debug
 	//acc_spi_write_2byte_word(0x55);

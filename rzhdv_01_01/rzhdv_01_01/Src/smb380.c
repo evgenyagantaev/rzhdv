@@ -76,7 +76,7 @@ void smb380_read_xyz_rawdata(uint8_t *data) //read smb380 xyz h and l registers 
 	in_data = SPI2->DR; // read
 
 	data[5] = (uint8_t)(in_data>>8);   // msb
-	//data[6] = (uint8_t)in_data;        // lsb      temperature
+	data[6] = (uint8_t)in_data;        // lsb      temperature
 
 	acc_spi_chipsel_high();
 
