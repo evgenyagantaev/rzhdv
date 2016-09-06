@@ -1,0 +1,67 @@
+/*
+ * isoline.h
+ *
+ *  Created on: Sep 5, 2016
+ *      Author: root
+ */
+
+#ifndef INC_ISOLINE_H_OLD_
+#define INC_ISOLINE_H_OLD_
+
+#include "stdint.h"
+
+// elements of lists that are containing samples of cyclic and sorted buffers
+// (for isoline calculating)
+typedef struct strSortedBufferList
+{
+   uint16_t sample;
+   struct strSortedBufferList *next;
+   struct strSortedBufferList *previous;
+} SortedBufferList;
+typedef struct strBufferList
+{
+   uint16_t sample;
+   struct strBufferList *next;
+   struct strSortedBufferList *sorted;
+} BufferList;
+
+
+
+// pointers to heads and tails of buffers
+static SortedBufferList *sortedBuffer;
+static BufferList *samplesBuffer;
+static BufferList *samplesBufferTail;
+
+static BufferList *bufferPointer;
+static SortedBufferList *sortedBufferPointer;
+
+
+//************************* constants ***************************************
+static const uint16_t AVERAGINGBUFFERLENGTH = 15;
+static const uint16_t TARGETISOLINELEVEL = 2048;
+static const uint16_t MAXISOLINEDEVIATION = 20;
+// isoline deviation which turns on active adjustment mode
+static const uint16_t ACTIVEMODEISOLINEDEVIATION = 150;
+static const uint16_t DACSTEP = 3;
+// max number which we can set to DAC (matches supply voltage 3.3V)
+static const uint16_t MAXDACINPUT = 4095;
+
+// length of cyclic and sorted buffers, which we are using for isoline
+// calculation
+static const uint16_t BUFFERLENGTH = 13;
+// number of samples we cut on the edges of sorted buffer
+static const uint16_t SAMPLESTOCUT =  5;
+//*********************** end constants *************************************
+
+// flag; if set, says that mode of active adjustment of isoline level is ON
+static int activeMode;
+
+// currentvalue of isoline level
+uint16_t currentIsoline;
+
+
+
+
+
+
+#endif /* INC_ISOLINE_H_OLD_ */

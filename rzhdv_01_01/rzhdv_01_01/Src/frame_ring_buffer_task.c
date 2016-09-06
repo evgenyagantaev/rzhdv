@@ -13,10 +13,15 @@ void frame_ring_buffer_task()
 {
     if(get_received_frames_counter() < timer250hz_get_tick())
     {
-        //debug
-        //HAL_GPIO_TogglePin(GPIOA, td_power_out_Pin);
 
         frame_ring_buffer_push(adas1000_read_frame(), FRAME_LENGTH);
+        //debug
+        /*
+        if((GPIOB->IDR & GPIO_PIN_0) == GPIO_PIN_RESET)
+        	GPIOB->BSRR = (uint32_t)GPIO_PIN_0;
+        else
+        	GPIOB->BRR = (uint32_t)GPIO_PIN_0;
+        //*/
 
         //int ecg = (ecg_ring_buffer[0][1]&((uint32_t)0x00ffffff)) - (ecg_ring_buffer[0][3]&((uint32_t)0x00ffffff));
         //int ecg = ecg_ring_buffer[0][3]&((uint32_t)0x00ffffff);

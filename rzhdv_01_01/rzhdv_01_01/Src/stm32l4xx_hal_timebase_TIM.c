@@ -132,7 +132,6 @@ void HAL_ResumeTick(void)
   __HAL_TIM_ENABLE_IT(&htim4, TIM_IT_UPDATE);
 }
 
-extern uint32_t timer250hz_tick;
 /**
   * @brief  Period elapsed callback in non blocking mode
   * @note   This function is called  when TIM4 interrupt took place, inside

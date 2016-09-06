@@ -25,7 +25,10 @@ void timer250hz_start(void)
     TIM3->CR1 |= TIM_CR1_CEN;
 }
 
-
+void timer250hz_increment_tick()
+{
+    timer250hz_tick++;
+}
 
 uint32_t timer250hz_get_tick()
 {

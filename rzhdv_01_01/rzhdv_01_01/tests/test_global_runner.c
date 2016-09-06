@@ -167,10 +167,10 @@ int main(void)
     uint32_t data;
     while(1)
 	{
-		// read register 0x40 (frame header), initiate frame reading
-		//synchronize();
-        //write_4byte_word(((uint32_t)0x40) << 24);
-        //data = read_4byte_word();
+		read register 0x40 (frame header), initiate frame reading
+		synchronize();
+        write_4byte_word(((uint32_t)0x40) << 24);
+        data = read_4byte_word();
         data = read_control_register(0x40);
 	}
 	//*/
@@ -222,18 +222,18 @@ int main(void)
     char message[64];
     int counter = 0;
 
-    /*
+    /*                   // c%dp%03dm%dt%03dr%03dG
     while (1)
     {
-        sprintf(message, "c%dp%03dm%dv%03dG\r\n", counter%4, 75-3+(counter%7), counter%10, 80+(counter%6));
+        sprintf(message, "c%dp%03dm%dt%03dr%03dG\r\n", counter%5, 75-3+(counter%7), counter%10, 360+(counter%6), counter%14);
         USBD_HID_SendReport(&USBD_Device, message, strlen(message));
         HAL_GPIO_WritePin(GPIOA, green_led_odrain_Pin, GPIO_PIN_SET);
-        HAL_Delay(1000);
+        HAL_Delay(2000);
         counter++;
-        sprintf(message, "c%dp%03dm%dv%03dG\r\n", counter%4, 75-3+(counter%7), counter%10, 80+(counter%6));
+        sprintf(message, "c%dp%03dm%dt%03dr%03dG\r\n", counter%5, 75-3+(counter%7), counter%10, 360+(counter%6), counter%14);
         USBD_HID_SendReport(&USBD_Device, message, strlen(message));
         HAL_GPIO_WritePin(GPIOA, green_led_odrain_Pin, GPIO_PIN_RESET);
-        HAL_Delay(1000);
+        HAL_Delay(2000);
         counter++;
     }
     //*/
@@ -243,8 +243,10 @@ int main(void)
 	configure_adas1000();
     while(1)
     {
-        //frame_ring_buffer_task();
-		acc_data_read_task();
+        frame_ring_buffer_task();
+        ecg_ring_buffer_task();
+        //isoline_calculation_task();
+		//acc_data_read_task();
     }
     //return (UnityEnd());
 }

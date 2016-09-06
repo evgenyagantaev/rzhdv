@@ -26,6 +26,8 @@ int ecg_ring_buffer_push(uint32_t sample)
 
     // increment index
     current_ecg_push_index++;
+    // increment counter of received samples
+    received_ecg_samples_counter++;
 
     // check overflow situation
     if((current_ecg_push_index - current_ecg_pop_index) >= ECGBUFFERLENGTH)

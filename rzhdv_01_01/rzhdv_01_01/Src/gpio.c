@@ -114,6 +114,13 @@ void MX_GPIO_Init(void)
 	HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 0);
 	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
+	// debug pin
+	GPIO_InitStruct.Pin = GPIO_PIN_0;
+	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
 	/*Configure GPIO pin Output Level */
 	HAL_GPIO_WritePin(GPIOA, td_power_out_Pin|red_led_odrain_Pin|green_led_odrain_Pin|spi1_chipsel_Pin
 						  |reset_adas_Pin|extern_watchdog_Pin, GPIO_PIN_RESET);

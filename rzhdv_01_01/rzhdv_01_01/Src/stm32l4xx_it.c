@@ -18,13 +18,7 @@ extern TIM_HandleTypeDef htim4;
 */
 void SysTick_Handler(void)
 {
-  /* USER CODE BEGIN SysTick_IRQn 0 */
-
-  /* USER CODE END SysTick_IRQn 0 */
   osSystickHandler();
-  /* USER CODE BEGIN SysTick_IRQn 1 */
-
-  /* USER CODE END SysTick_IRQn 1 */
 }
 
 /******************************************************************************/
@@ -39,13 +33,14 @@ void SysTick_Handler(void)
 */
 void TIM4_IRQHandler(void)
 {
-  /* USER CODE BEGIN TIM4_IRQn 0 */
-
-  /* USER CODE END TIM4_IRQn 0 */
   HAL_TIM_IRQHandler(&htim4);
-  /* USER CODE BEGIN TIM4_IRQn 1 */
-
-  /* USER CODE END TIM4_IRQn 1 */
+  //debug
+  /*
+  if((GPIOB->IDR & GPIO_PIN_0) == GPIO_PIN_RESET)
+	GPIOB->BSRR = (uint32_t)GPIO_PIN_0;
+  else
+	GPIOB->BRR = (uint32_t)GPIO_PIN_0;
+  //*/
 }
 
 /**
