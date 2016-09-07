@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32l4xx_hal_tim_ex.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    26-February-2016
+  * @version V1.5.1
+  * @date    31-May-2016
   * @brief   TIM HAL module driver.
   *          This file provides firmware functions to manage the following
   *          functionalities of the Timer Extended peripheral:
@@ -1768,7 +1768,7 @@ HAL_StatusTypeDef HAL_TIMEx_ConfigBreakInput(TIM_HandleTypeDef *htim,
   assert_param(IS_TIM_BREAKINPUTSOURCE_STATE(sBreakInputConfig->Enable));
 
 #if defined(STM32L471xx) || defined(STM32L475xx) || defined(STM32L476xx) || defined(STM32L485xx) || defined(STM32L486xx)
-  if (sBreakInputConfig->Source != TIM_BREAKINPUTSOURCE_DFSDM)
+  if (sBreakInputConfig->Source != TIM_BREAKINPUTSOURCE_DFSDM1)
   {
     assert_param(IS_TIM_BREAKINPUTSOURCE_POLARITY(sBreakInputConfig->Polarity));
   }
@@ -1807,9 +1807,9 @@ HAL_StatusTypeDef HAL_TIMEx_ConfigBreakInput(TIM_HandleTypeDef *htim,
     break;
 
 #if defined(STM32L471xx) || defined(STM32L475xx) || defined(STM32L476xx) || defined(STM32L485xx) || defined(STM32L486xx)
-  case TIM_BREAKINPUTSOURCE_DFSDM:
+  case TIM_BREAKINPUTSOURCE_DFSDM1:
     {
-      bkin_enable_mask = TIM1_OR2_BKDFBK0E;
+      bkin_enable_mask = TIM1_OR2_BKDF1BK0E;
       bkin_enable_bitpos = 8;
     }
     break;    
@@ -1832,7 +1832,7 @@ HAL_StatusTypeDef HAL_TIMEx_ConfigBreakInput(TIM_HandleTypeDef *htim,
         
         /* Set the break input polarity */
 #if defined(STM32L471xx) || defined(STM32L475xx) || defined(STM32L476xx) || defined(STM32L485xx) || defined(STM32L486xx)
-        if (sBreakInputConfig->Source != TIM_BREAKINPUTSOURCE_DFSDM)
+        if (sBreakInputConfig->Source != TIM_BREAKINPUTSOURCE_DFSDM1)
 #endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx */
         {
           tmporx &= ~bkin_polarity_mask;
@@ -1854,7 +1854,7 @@ HAL_StatusTypeDef HAL_TIMEx_ConfigBreakInput(TIM_HandleTypeDef *htim,
         
         /* Set the break input polarity */
 #if defined(STM32L471xx) || defined(STM32L475xx) || defined(STM32L476xx) || defined(STM32L485xx) || defined(STM32L486xx)
-        if (sBreakInputConfig->Source != TIM_BREAKINPUTSOURCE_DFSDM)
+        if (sBreakInputConfig->Source != TIM_BREAKINPUTSOURCE_DFSDM1)
 #endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx */
         {
           tmporx &= ~bkin_polarity_mask;

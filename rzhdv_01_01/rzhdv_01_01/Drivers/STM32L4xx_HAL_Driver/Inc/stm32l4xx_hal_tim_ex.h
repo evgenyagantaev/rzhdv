@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32l4xx_hal_tim_ex.h
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    26-February-2016
+  * @version V1.5.1
+  * @date    31-May-2016
   * @brief   Header file of TIM HAL Extended module.
   ******************************************************************************
   * @attention
@@ -89,7 +89,7 @@ typedef struct {
                                 This parameter can be a value of @ref TIMEx_Break_Input_Source_Enable */
   uint32_t Polarity;       /*!< Specifies the break input source polarity.
                                 This parameter can be a value of @ref TIMEx_Break_Input_Source_Polarity
-                                Not relevant when analog watchdog output of the DFSDM used as break input source */
+                                Not relevant when analog watchdog output of the DFSDM1 used as break input source */
 } TIMEx_BreakInputConfigTypeDef;
 
 /**
@@ -200,7 +200,7 @@ typedef struct {
 #define TIM_BREAKINPUTSOURCE_COMP1    ((uint32_t)(0x00000002)) /* !< The COMP1 output is connected to the break input */
 #define TIM_BREAKINPUTSOURCE_COMP2    ((uint32_t)(0x00000004)) /* !< The COMP2 output is connected to the break input */
 #if defined (STM32L471xx) || defined (STM32L475xx) || defined (STM32L476xx) || defined (STM32L485xx) || defined (STM32L486xx)
-#define TIM_BREAKINPUTSOURCE_DFSDM    ((uint32_t)(0x00000008)) /* !< The analog watchdog output of the DFSDM peripheral is connected to the break input */
+#define TIM_BREAKINPUTSOURCE_DFSDM1   ((uint32_t)(0x00000008)) /* !< The analog watchdog output of the DFSDM1 peripheral is connected to the break input */
 #endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx */
 /**
   * @}
@@ -252,7 +252,7 @@ typedef struct {
 #define IS_TIM_BREAKINPUTSOURCE(__SOURCE__)  (((__SOURCE__) == TIM_BREAKINPUTSOURCE_BKIN)  || \
                                               ((__SOURCE__) == TIM_BREAKINPUTSOURCE_COMP1) || \
                                               ((__SOURCE__) == TIM_BREAKINPUTSOURCE_COMP2) || \
-                                              ((__SOURCE__) == TIM_BREAKINPUTSOURCE_DFSDM))
+                                              ((__SOURCE__) == TIM_BREAKINPUTSOURCE_DFSDM1))
 #else
 #define IS_TIM_BREAKINPUTSOURCE(__SOURCE__)  (((__SOURCE__) == TIM_BREAKINPUTSOURCE_BKIN)  || \
                                               ((__SOURCE__) == TIM_BREAKINPUTSOURCE_COMP1) || \

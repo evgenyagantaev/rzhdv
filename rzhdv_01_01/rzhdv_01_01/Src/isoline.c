@@ -57,7 +57,7 @@ void shift_array(uint32_t *array, int LENGTH)
 {
 	int i;
 	for(i=0; i<(LENGTH-1); i++)
-		array[i] = array[i-1];
+		array[i] = array[i+1];
 }
 void copy_array(uint32_t *array_from, uint32_t *array_to, int LENGTH)
 {

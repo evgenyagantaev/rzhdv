@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32l4xx_hal_rcc_ex.h
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    26-February-2016
+  * @version V1.5.1
+  * @date    31-May-2016
   * @brief   Header file of RCC HAL Extended module.
   ******************************************************************************
   * @attention
@@ -66,8 +66,14 @@
 typedef struct
 {
 
+  uint32_t PLLSAI1Source;    /*!< PLLSAI1Source: PLLSAI1 entry clock source.
+                                  This parameter must be a value of @ref RCC_PLL_Clock_Source */
+
+  uint32_t PLLSAI1M;         /*!< PLLSAI1M: specifies the division factor for PLLSAI1 input clock.
+                                  This parameter must be a number between Min_Data = 1 and Max_Data = 8 */
+
   uint32_t PLLSAI1N;         /*!< PLLSAI1N: specifies the multiplication factor for PLLSAI1 VCO output clock.
-                                  This parameter must be a number between 8 and 86. */
+                                  This parameter must be a number between 8 and 86 or 127 depending on devices. */
 
   uint32_t PLLSAI1P;         /*!< PLLSAI1P: specifies the division factor for SAI clock.
                                   This parameter must be a value of @ref RCC_PLLP_Clock_Divider */
@@ -90,8 +96,14 @@ typedef struct
 typedef struct
 {
 
+  uint32_t PLLSAI2Source;    /*!< PLLSAI2Source: PLLSAI2 entry clock source.
+                                  This parameter must be a value of @ref RCC_PLL_Clock_Source */
+
+  uint32_t PLLSAI2M;         /*!< PLLSAI2M: specifies the division factor for PLLSAI2 input clock.
+                                  This parameter must be a number between Min_Data = 1 and Max_Data = 8 */
+
   uint32_t PLLSAI2N;         /*!< PLLSAI2N: specifies the multiplication factor for PLLSAI2 VCO output clock.
-                                  This parameter must be a number between 8 and 86. */
+                                  This parameter must be a number between 8 and 86 or 127 depending on devices. */
 
   uint32_t PLLSAI2P;         /*!< PLLSAI2P: specifies the division factor for SAI clock.
                                   This parameter must be a value of @ref RCC_PLLP_Clock_Divider */
@@ -202,15 +214,19 @@ typedef struct
   uint32_t AdcClockSelection;      /*!< Specifies ADC interface clock source.
                                         This parameter can be a value of @ref RCCEx_ADC_Clock_Source */
 
+#if defined(SWPMI1)
+
   uint32_t Swpmi1ClockSelection;   /*!< Specifies SWPMI1 clock source.
                                         This parameter can be a value of @ref RCCEx_SWPMI1_Clock_Source */
 
-#if defined(DFSDM_Filter0)
+#endif /* SWPMI1 */
 
-  uint32_t DfsdmClockSelection;    /*!< Specifies DFSDM clock source.
-                                        This parameter can be a value of @ref RCCEx_DFSDM_Clock_Source */
+#if defined(DFSDM1_Filter0)
 
-#endif /* DFSDM_Filter0 */
+  uint32_t Dfsdm1ClockSelection;   /*!< Specifies DFSDM1 clock source.
+                                        This parameter can be a value of @ref RCCEx_DFSDM1_Clock_Source */
+
+#endif /* DFSDM1_Filter0 */
 
   uint32_t RTCClockSelection;      /*!< Specifies RTC clock source.
                                         This parameter can be a value of @ref RCC_RTC_Clock_Source */
@@ -316,8 +332,8 @@ typedef struct
 #endif
 #define RCC_PERIPHCLK_ADC              ((uint32_t)0x00004000U)
 #define RCC_PERIPHCLK_SWPMI1           ((uint32_t)0x00008000U)
-#if defined(DFSDM_Filter0)
-#define RCC_PERIPHCLK_DFSDM            ((uint32_t)0x00010000U)
+#if defined(DFSDM1_Filter0)
+#define RCC_PERIPHCLK_DFSDM1           ((uint32_t)0x00010000U)
 #endif
 #define RCC_PERIPHCLK_RTC              ((uint32_t)0x00020000U)
 #define RCC_PERIPHCLK_RNG              ((uint32_t)0x00040000U)
@@ -535,14 +551,15 @@ typedef struct
   */
 #define RCC_ADCCLKSOURCE_NONE        ((uint32_t)0x00000000U)
 #define RCC_ADCCLKSOURCE_PLLSAI1      RCC_CCIPR_ADCSEL_0
-#if defined(RCC_PLLSAI2_SUPPORT)
+#if defined(STM32L471xx) || defined(STM32L475xx) || defined(STM32L476xx) || defined(STM32L485xx) || defined(STM32L486xx)
 #define RCC_ADCCLKSOURCE_PLLSAI2      RCC_CCIPR_ADCSEL_1
-#endif /* RCC_PLLSAI2_SUPPORT */
+#endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx */
 #define RCC_ADCCLKSOURCE_SYSCLK       RCC_CCIPR_ADCSEL
 /**
   * @}
   */
 
+#if defined(SWPMI1)
 /** @defgroup RCCEx_SWPMI1_Clock_Source SWPMI1 Clock Source
   * @{
   */
@@ -551,17 +568,18 @@ typedef struct
 /**
   * @}
   */
+#endif /* SWPMI1 */
 
-#if defined(DFSDM_Filter0)
-/** @defgroup RCCEx_DFSDM_Clock_Source DFSDM Clock Source
+#if defined(DFSDM1_Filter0)
+/** @defgroup RCCEx_DFSDM1_Clock_Source DFSDM1 Clock Source
   * @{
   */
-#define RCC_DFSDMCLKSOURCE_PCLK        ((uint32_t)0x00000000U)
-#define RCC_DFSDMCLKSOURCE_SYSCLK      RCC_CCIPR_DFSDMSEL
+#define RCC_DFSDM1CLKSOURCE_PCLK       ((uint32_t)0x00000000U)
+#define RCC_DFSDM1CLKSOURCE_SYSCLK     RCC_CCIPR_DFSDM1SEL
 /**
   * @}
   */
-#endif /* DFSDM_Filter0 */
+#endif /* DFSDM1_Filter0 */
 
 /** @defgroup RCCEx_EXTI_LINE_LSECSS  RCC LSE CSS external interrupt line
   * @{
@@ -739,9 +757,9 @@ typedef struct
 
 #define __HAL_RCC_PLLSAI1_CONFIG(__PLLSAI1N__, __PLLSAI1P__, __PLLSAI1Q__, __PLLSAI1R__) \
                   WRITE_REG(RCC->PLLSAI1CFGR, ((__PLLSAI1N__) << POSITION_VAL(RCC_PLLSAI1CFGR_PLLSAI1N)) | \
-                    (((__PLLSAI1P__) >> 4U) << POSITION_VAL(RCC_PLLSAI1CFGR_PLLSAI1P)) | \
-                    ((((__PLLSAI1Q__) >> 1U) - 1U) << POSITION_VAL(RCC_PLLSAI1CFGR_PLLSAI1Q)) | \
-                    ((((__PLLSAI1R__) >> 1U) - 1U) << POSITION_VAL(RCC_PLLSAI1CFGR_PLLSAI1R)))
+                   (((__PLLSAI1P__) >> 4U) << POSITION_VAL(RCC_PLLSAI1CFGR_PLLSAI1P)) | \
+                   ((((__PLLSAI1Q__) >> 1U) - 1U) << POSITION_VAL(RCC_PLLSAI1CFGR_PLLSAI1Q)) | \
+                   ((((__PLLSAI1R__) >> 1U) - 1U) << POSITION_VAL(RCC_PLLSAI1CFGR_PLLSAI1R)))
                     
 #endif /* RCC_PLLSAI1P_DIV_2_31_SUPPORT */
 
@@ -874,19 +892,32 @@ typedef struct
   *         output frequency is between 64 and 344 MHz.
   *
   * @param  __PLLSAI2P__ specifies the division factor for SAI clock.
-  *          This parameter must be a number in the range (7 or 17).
-  *
+  *         This parameter must be a number in the range (7 or 17) for STM32L47xxx/L48xxx
+  *         else (2 to 31).
+  *         SAI2 clock frequency = f(PLLSAI2) / PLLSAI2P
   *
   * @param  __PLLSAI2R__ specifies the division factor for SAR ADC clock.
-  *          This parameter must be in the range (2, 4, 6 or 8)
+  *         This parameter must be in the range (2, 4, 6 or 8).
   *
   * @retval None
   */
+
+#if defined(RCC_PLLSAI2P_DIV_2_31_SUPPORT)
+
+#define __HAL_RCC_PLLSAI2_CONFIG(__PLLSAI2N__, __PLLSAI2P__, __PLLSAI2R__) \
+                  WRITE_REG(RCC->PLLSAI2CFGR, ((__PLLSAI2N__) << POSITION_VAL(RCC_PLLSAI2CFGR_PLLSAI2N)) | \
+                   ((((__PLLSAI2R__) >> 1U) - 1U) << POSITION_VAL(RCC_PLLSAI2CFGR_PLLSAI2R)) | \
+                   ((__PLLSAI2P__) << POSITION_VAL(RCC_PLLSAI2CFGR_PLLSAI2PDIV)))
+
+#else
 
 #define __HAL_RCC_PLLSAI2_CONFIG(__PLLSAI2N__, __PLLSAI2P__, __PLLSAI2R__) \
                   WRITE_REG(RCC->PLLSAI2CFGR, ((__PLLSAI2N__) << POSITION_VAL(RCC_PLLSAI2CFGR_PLLSAI2N)) | \
                     (((__PLLSAI2P__) >> 4U) << POSITION_VAL(RCC_PLLSAI2CFGR_PLLSAI2P)) | \
                     ((((__PLLSAI2R__) >> 1U) - 1U) << POSITION_VAL(RCC_PLLSAI2CFGR_PLLSAI2R)))
+
+#endif /* RCC_PLLSAI2P_DIV_2_31_SUPPORT */
+
 
 /**
   * @brief  Macro to configure the PLLSAI2 clock multiplication factor N.
@@ -924,12 +955,12 @@ typedef struct
 /** @brief  Macro to configure the PLLSAI2 clock division factor R.
   *
   * @note   This function must be used only when the PLLSAI2 is disabled.
-  * @note   PLLSAI1 clock source is common with the main PLL (configured through
+  * @note   PLLSAI2 clock source is common with the main PLL (configured through
   *         __HAL_RCC_PLL_CONFIG() macro)
   *
   * @param  __PLLSAI2R__ specifies the division factor.
   *         This parameter must be in the range (2, 4, 6 or 8).
-  *         Use to set ADC clock frequency = f(PLLSAI2) / __PLLSAI2Q__
+  *         Use to set ADC clock frequency = f(PLLSAI2) / __PLLSAI2R__
   *
   * @retval None
   */
@@ -987,7 +1018,9 @@ typedef struct
   *             @arg @ref RCC_SAI1CLKSOURCE_PLL  SAI1 clock  = PLL "P" clock (PLLSAI3CLK if PLLSAI2 exists, else PLLSAI2CLK)
   *             @arg @ref RCC_SAI1CLKSOURCE_PIN  SAI1 clock = External Clock (SAI1_EXTCLK)
   *
+  @if STM32L443xx
   * @note  HSI16 is automatically set as SAI1 clock source when PLL are disabled for devices without PLLSAI2.
+  @endif
   *
   * @retval None
   */
@@ -1020,6 +1053,7 @@ typedef struct
   *             @arg @ref RCC_SAI2CLKSOURCE_PLLSAI2  SAI2 clock = PLLSAI2 "P" clock (PLLSAI2CLK)
   *             @arg @ref RCC_SAI2CLKSOURCE_PLL  SAI2 clock  = PLL "P" clock (PLLSAI3CLK)
   *             @arg @ref RCC_SAI2CLKSOURCE_PIN  SAI2 clock = External Clock (SAI2_EXTCLK)
+  *
   * @retval None
   */
 #define __HAL_RCC_SAI2_CONFIG(__SAI2_CLKSOURCE__ )\
@@ -1292,18 +1326,26 @@ typedef struct
 
 /** @brief  Macro to configure the SDMMC1 clock.
   *
+  @if STM32L486xx
   * @note  USB, RNG and SDMMC1 peripherals share the same 48MHz clock source.
+  @endif
+  *
+  @if STM32L443xx
+  * @note  USB, RNG and SDMMC1 peripherals share the same 48MHz clock source.
+  @endif
   *
   * @param  __SDMMC1_CLKSOURCE__ specifies the SDMMC1 clock source.
   *         This parameter can be one of the following values:
   @if STM32L486xx
   *            @arg @ref RCC_SDMMC1CLKSOURCE_NONE  No clock selected as SDMMC1 clock for devices without HSI48
+  *            @arg @ref RCC_SDMMC1CLKSOURCE_MSI  MSI selected as SDMMC1 clock
+  *            @arg @ref RCC_SDMMC1CLKSOURCE_PLLSAI1  PLLSAI1 Clock selected as SDMMC1 clock
   @endif
   @if STM32L443xx
   *            @arg @ref RCC_SDMMC1CLKSOURCE_HSI48  HSI48 selected as SDMMC1 clock for devices with HSI48
-  @endif
   *            @arg @ref RCC_SDMMC1CLKSOURCE_MSI  MSI selected as SDMMC1 clock
   *            @arg @ref RCC_SDMMC1CLKSOURCE_PLLSAI1  PLLSAI1 Clock selected as SDMMC1 clock
+  @endif
   *            @arg @ref RCC_SDMMC1CLKSOURCE_PLL  PLL Clock selected as SDMMC1 clock
   * @retval None
   */
@@ -1314,12 +1356,14 @@ typedef struct
   * @retval The clock source can be one of the following values:
   @if STM32L486xx
   *            @arg @ref RCC_SDMMC1CLKSOURCE_NONE  No clock selected as SDMMC1 clock for devices without HSI48
+  *            @arg @ref RCC_SDMMC1CLKSOURCE_MSI  MSI selected as SDMMC1 clock
+  *            @arg @ref RCC_SDMMC1CLKSOURCE_PLLSAI1  PLLSAI1 "Q" clock (PLL48M2CLK) selected as SDMMC1 clock
   @endif
   @if STM32L443xx
   *            @arg @ref RCC_SDMMC1CLKSOURCE_HSI48  HSI48 selected as SDMMC1 clock for devices with HSI48
-  @endif
   *            @arg @ref RCC_SDMMC1CLKSOURCE_MSI  MSI selected as SDMMC1 clock
   *            @arg @ref RCC_SDMMC1CLKSOURCE_PLLSAI1  PLLSAI1 "Q" clock (PLL48M2CLK) selected as SDMMC1 clock
+  @endif
   *            @arg @ref RCC_SDMMC1CLKSOURCE_PLL  PLL "Q" clock (PLL48M1CLK) selected as SDMMC1 clock
   */
 #define __HAL_RCC_GET_SDMMC1_SOURCE() ((uint32_t)(READ_BIT(RCC->CCIPR, RCC_CCIPR_CLK48SEL)))
@@ -1404,7 +1448,7 @@ typedef struct
   *            @arg @ref RCC_ADCCLKSOURCE_NONE  No clock selected as ADC clock
   *            @arg @ref RCC_ADCCLKSOURCE_PLLSAI1  PLLSAI1 Clock selected as ADC clock
   @if STM32L486xx
-  *            @arg @ref RCC_ADCCLKSOURCE_PLLSAI2  PLLSAI2 Clock selected as ADC clock for devices with PLLSAI2
+  *            @arg @ref RCC_ADCCLKSOURCE_PLLSAI2  PLLSAI2 Clock selected as ADC clock for STM32L47x/STM32L48x/STM32L49x/STM32L4Ax devices
   @endif
   *            @arg @ref RCC_ADCCLKSOURCE_SYSCLK  System Clock selected as ADC clock
   * @retval None
@@ -1417,11 +1461,13 @@ typedef struct
   *            @arg @ref RCC_ADCCLKSOURCE_NONE  No clock selected as ADC clock
   *            @arg @ref RCC_ADCCLKSOURCE_PLLSAI1  PLLSAI1 Clock selected as ADC clock
   @if STM32L486xx
-  *            @arg @ref RCC_ADCCLKSOURCE_PLLSAI2  PLLSAI2 Clock selected as ADC clock for devices with PLLSAI2
+  *            @arg @ref RCC_ADCCLKSOURCE_PLLSAI2  PLLSAI2 Clock selected as ADC clock for STM32L47x/STM32L48x/STM32L49x/STM32L4Ax devices
   @endif
   *            @arg @ref RCC_ADCCLKSOURCE_SYSCLK  System Clock selected as ADC clock
   */
 #define __HAL_RCC_GET_ADC_SOURCE() ((uint32_t)(READ_BIT(RCC->CCIPR, RCC_CCIPR_ADCSEL)))
+
+#if defined(SWPMI1)
 
 /** @brief  Macro to configure the SWPMI1 clock.
   * @param  __SWPMI1_CLKSOURCE__ specifies the SWPMI1 clock source.
@@ -1440,26 +1486,28 @@ typedef struct
   */
 #define __HAL_RCC_GET_SWPMI1_SOURCE() ((uint32_t)(READ_BIT(RCC->CCIPR, RCC_CCIPR_SWPMI1SEL)))
 
-#if defined(DFSDM_Filter0)
+#endif /* SWPMI1 */
 
-/** @brief  Macro to configure the DFSDM clock.
-  * @param  __DFSDM_CLKSOURCE__ specifies the DFSDM clock source.
+#if defined(DFSDM1_Filter0)
+/** @brief  Macro to configure the DFSDM1 clock.
+  * @param  __DFSDM1_CLKSOURCE__ specifies the DFSDM1 clock source.
   *         This parameter can be one of the following values:
-  *            @arg @ref RCC_DFSDMCLKSOURCE_PCLK  PCLK Clock selected as DFSDM clock
-  *            @arg @ref RCC_DFSDMCLKSOURCE_SYSCLK  System Clock selected as DFSDM clock
+  *            @arg @ref RCC_DFSDM1CLKSOURCE_PCLK  PCLK Clock selected as DFSDM1 clock
+  *            @arg @ref RCC_DFSDM1CLKSOURCE_SYSCLK  System Clock selected as DFSDM1 clock
   * @retval None
   */
-#define __HAL_RCC_DFSDM_CONFIG(__DFSDM_CLKSOURCE__) \
-                  MODIFY_REG(RCC->CCIPR, RCC_CCIPR_DFSDMSEL, (uint32_t)(__DFSDM_CLKSOURCE__))
+#define __HAL_RCC_DFSDM1_CONFIG(__DFSDM1_CLKSOURCE__) \
+                  MODIFY_REG(RCC->CCIPR, RCC_CCIPR_DFSDM1SEL, (uint32_t)(__DFSDM1_CLKSOURCE__))
 
-/** @brief  Macro to get the DFSDM clock source.
+/** @brief  Macro to get the DFSDM1 clock source.
   * @retval The clock source can be one of the following values:
-  *            @arg @ref RCC_DFSDMCLKSOURCE_PCLK  PCLK Clock selected as DFSDM clock
-  *            @arg @ref RCC_DFSDMCLKSOURCE_SYSCLK  System Clock selected as DFSDM clock
+  *            @arg @ref RCC_DFSDM1CLKSOURCE_PCLK  PCLK Clock selected as DFSDM1 clock
+  *            @arg @ref RCC_DFSDM1CLKSOURCE_SYSCLK  System Clock selected as DFSDM1 clock
   */
-#define __HAL_RCC_GET_DFSDM_SOURCE() ((uint32_t)(READ_BIT(RCC->CCIPR, RCC_CCIPR_DFSDMSEL)))
+#define __HAL_RCC_GET_DFSDM1_SOURCE() ((uint32_t)(READ_BIT(RCC->CCIPR, RCC_CCIPR_DFSDM1SEL)))
 
-#endif /* DFSDM_Filter0 */
+#endif /* DFSDM1_Filter0 */
+
 
 /** @defgroup RCCEx_Flags_Interrupts_Management Flags Interrupts Management
   * @brief macros to manage the specified RCC Flags and interrupts.
@@ -1518,7 +1566,7 @@ typedef struct
   */
 #define __HAL_RCC_PLLSAI2_GET_FLAG()   (READ_BIT(RCC->CR, RCC_CR_PLLSAI2RDY) == (RCC_CR_PLLSAI2RDY))
 
-#endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx */
+#endif /* RCC_PLLSAI2_SUPPORT */
 
 
 /**
@@ -1805,7 +1853,7 @@ HAL_StatusTypeDef HAL_RCCEx_DisablePLLSAI1(void);
 HAL_StatusTypeDef HAL_RCCEx_EnablePLLSAI2(RCC_PLLSAI2InitTypeDef  *PLLSAI2Init);
 HAL_StatusTypeDef HAL_RCCEx_DisablePLLSAI2(void);
 
-#endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx */
+#endif /* RCC_PLLSAI2_SUPPORT */
 
 void              HAL_RCCEx_WakeUpStopCLKConfig(uint32_t WakeUpClk);
 void              HAL_RCCEx_StandbyMSIRangeConfig(uint32_t MSIRange);
@@ -1931,7 +1979,7 @@ void              HAL_RCCEx_CRS_ErrorCallback(uint32_t Error);
                 (((__SELECTION__) & RCC_PERIPHCLK_SAI2)    == RCC_PERIPHCLK_SAI2)    || \
                 (((__SELECTION__) & RCC_PERIPHCLK_ADC)     == RCC_PERIPHCLK_ADC)     || \
                 (((__SELECTION__) & RCC_PERIPHCLK_SWPMI1)  == RCC_PERIPHCLK_SWPMI1)  || \
-                (((__SELECTION__) & RCC_PERIPHCLK_DFSDM)   == RCC_PERIPHCLK_DFSDM)   || \
+                (((__SELECTION__) & RCC_PERIPHCLK_DFSDM1)  == RCC_PERIPHCLK_DFSDM1)  || \
                 (((__SELECTION__) & RCC_PERIPHCLK_RTC)     == RCC_PERIPHCLK_RTC)     || \
                 (((__SELECTION__) & RCC_PERIPHCLK_RNG)     == RCC_PERIPHCLK_RNG)     || \
                 (((__SELECTION__) & RCC_PERIPHCLK_SDMMC1)  == RCC_PERIPHCLK_SDMMC1))
@@ -1955,7 +2003,7 @@ void              HAL_RCCEx_CRS_ErrorCallback(uint32_t Error);
                 (((__SELECTION__) & RCC_PERIPHCLK_USB)     == RCC_PERIPHCLK_USB)     || \
                 (((__SELECTION__) & RCC_PERIPHCLK_ADC)     == RCC_PERIPHCLK_ADC)     || \
                 (((__SELECTION__) & RCC_PERIPHCLK_SWPMI1)  == RCC_PERIPHCLK_SWPMI1)  || \
-                (((__SELECTION__) & RCC_PERIPHCLK_DFSDM)   == RCC_PERIPHCLK_DFSDM)   || \
+                (((__SELECTION__) & RCC_PERIPHCLK_DFSDM1)  == RCC_PERIPHCLK_DFSDM1)  || \
                 (((__SELECTION__) & RCC_PERIPHCLK_RTC)     == RCC_PERIPHCLK_RTC)     || \
                 (((__SELECTION__) & RCC_PERIPHCLK_RNG)     == RCC_PERIPHCLK_RNG)     || \
                 (((__SELECTION__) & RCC_PERIPHCLK_SDMMC1)  == RCC_PERIPHCLK_SDMMC1))
@@ -2044,7 +2092,7 @@ void              HAL_RCCEx_CRS_ErrorCallback(uint32_t Error);
                 ((__SOURCE__) == RCC_SAI1CLKSOURCE_PLL)     || \
                 ((__SOURCE__) == RCC_SAI1CLKSOURCE_PIN))
 
-#endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx */
+#endif /* RCC_PLLSAI2_SUPPORT */
 
 #if defined(RCC_PLLSAI2_SUPPORT)
 
@@ -2054,7 +2102,7 @@ void              HAL_RCCEx_CRS_ErrorCallback(uint32_t Error);
                 ((__SOURCE__) == RCC_SAI2CLKSOURCE_PLL)     || \
                 ((__SOURCE__) == RCC_SAI2CLKSOURCE_PIN))
 
-#endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx */
+#endif /* RCC_PLLSAI2_SUPPORT */
 
 #define IS_RCC_LPTIM1CLK(__SOURCE__)  \
                (((__SOURCE__) == RCC_LPTIM1CLKSOURCE_PCLK) || \
@@ -2126,7 +2174,7 @@ void              HAL_RCCEx_CRS_ErrorCallback(uint32_t Error);
 #endif /* RCC_HSI48_SUPPORT */
 #endif /* USB_OTG_FS || USB */
 
-#if defined(RCC_PLLSAI2_SUPPORT)
+#if defined(STM32L471xx) || defined(STM32L475xx) || defined(STM32L476xx) || defined(STM32L485xx) || defined(STM32L486xx)
 
 #define IS_RCC_ADCCLKSOURCE(__SOURCE__)  \
                (((__SOURCE__) == RCC_ADCCLKSOURCE_NONE)    || \
@@ -2141,19 +2189,27 @@ void              HAL_RCCEx_CRS_ErrorCallback(uint32_t Error);
                 ((__SOURCE__) == RCC_ADCCLKSOURCE_PLLSAI1) || \
                 ((__SOURCE__) == RCC_ADCCLKSOURCE_SYSCLK))
 
-#endif /* RCC_PLLSAI2_SUPPORT */
+#endif /* STM32L471xx || STM32L475xx || STM32L476xx || STM32L485xx || STM32L486xx */
+
+#if defined(SWPMI1)
 
 #define IS_RCC_SWPMI1CLKSOURCE(__SOURCE__)  \
                (((__SOURCE__) == RCC_SWPMI1CLKSOURCE_PCLK) || \
                 ((__SOURCE__) == RCC_SWPMI1CLKSOURCE_HSI))
 
-#if defined(DFSDM_Filter0)
+#endif /* SWPMI1 */
 
-#define IS_RCC_DFSDMCLKSOURCE(__SOURCE__)  \
-               (((__SOURCE__) == RCC_DFSDMCLKSOURCE_PCLK) || \
-                ((__SOURCE__) == RCC_DFSDMCLKSOURCE_SYSCLK))
+#if defined(DFSDM1_Filter0)
 
-#endif /* DFSDM_Filter0 */
+#define IS_RCC_DFSDM1CLKSOURCE(__SOURCE__)  \
+               (((__SOURCE__) == RCC_DFSDM1CLKSOURCE_PCLK) || \
+                ((__SOURCE__) == RCC_DFSDM1CLKSOURCE_SYSCLK))
+
+#endif /* DFSDM1_Filter0 */
+
+#define IS_RCC_PLLSAI1SOURCE(__VALUE__)    IS_RCC_PLLSOURCE(__VALUE__)
+
+#define IS_RCC_PLLSAI1M_VALUE(__VALUE__)   ((1U <= (__VALUE__)) && ((__VALUE__) <= 8U))
 
 #define IS_RCC_PLLSAI1N_VALUE(__VALUE__)   ((8U <= (__VALUE__)) && ((__VALUE__) <= 86U))
 
@@ -2170,12 +2226,22 @@ void              HAL_RCCEx_CRS_ErrorCallback(uint32_t Error);
                                             ((__VALUE__) == 6U) || ((__VALUE__) == 8U))
 
 #if defined(RCC_PLLSAI2_SUPPORT)
+
+#define IS_RCC_PLLSAI2SOURCE(__VALUE__)    IS_RCC_PLLSOURCE(__VALUE__)
+
+#define IS_RCC_PLLSAI2M_VALUE(__VALUE__)   ((1U <= (__VALUE__)) && ((__VALUE__) <= 8U))
+
 #define IS_RCC_PLLSAI2N_VALUE(__VALUE__)   ((8U <= (__VALUE__)) && ((__VALUE__) <= 86U))
 
+#if defined(RCC_PLLSAI2P_DIV_2_31_SUPPORT)
+#define IS_RCC_PLLSAI2P_VALUE(__VALUE__)   (((__VALUE__) >= 2U) && ((__VALUE__) <= 31U))
+#else
 #define IS_RCC_PLLSAI2P_VALUE(__VALUE__)   (((__VALUE__) == 7U) || ((__VALUE__) == 17U))
+#endif /* RCC_PLLSAI2P_DIV_2_31_SUPPORT */
 
 #define IS_RCC_PLLSAI2R_VALUE(__VALUE__)   (((__VALUE__) == 2U) || ((__VALUE__) == 4U) || \
                                             ((__VALUE__) == 6U) || ((__VALUE__) == 8U))
+
 #endif /* RCC_PLLSAI2_SUPPORT */
 
 #if defined(CRS)
