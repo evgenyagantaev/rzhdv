@@ -24,7 +24,7 @@ void ecg_ring_buffer_task()
 		ecg_ring_buffer_push(sample);
 		isoline_add_new_sample(sample);
 		//debug
-		//*
+		/*
 		if((GPIOB->IDR & GPIO_PIN_0) == GPIO_PIN_RESET)
 			GPIOB->BSRR = (uint32_t)GPIO_PIN_0;
 		else

@@ -93,7 +93,7 @@ void resetTest(void)
   setUp();
 }
 
-
+void Error_Handler();
 /* Private function prototypes -----------------------------------------------*/
 
 
@@ -109,22 +109,22 @@ int main(void)
     SystemClock_Config();
 
     /* Enable Power Clock*/
-  __HAL_RCC_PWR_CLK_ENABLE();
+    //__HAL_RCC_PWR_CLK_ENABLE();
 
     /* Enable USB power on Pwrctrl CR2 register */
-    HAL_PWREx_EnableVddUSB();
+    //HAL_PWREx_EnableVddUSB();
 
     /* Initialize all configured peripherals */
     MX_GPIO_Init();
 
     /* Init Device Library */
-    USBD_Init(&USBD_Device, &HID_Desc, 0);
+    //USBD_Init(&USBD_Device, &HID_Desc, 0);
 
     /* Add Supported Class */
-    USBD_RegisterClass(&USBD_Device, USBD_HID_CLASS);
+    //USBD_RegisterClass(&USBD_Device, USBD_HID_CLASS);
 
     /* Start Device Process */
-    USBD_Start(&USBD_Device);
+    //USBD_Start(&USBD_Device);
 
     // off both of leds
     HAL_GPIO_WritePin(GPIOA, red_led_odrain_Pin, GPIO_PIN_SET);
@@ -161,19 +161,6 @@ int main(void)
     SPI1->CR1 |= SPI_CR1_SPE;
     // enable spi1
     SPI2->CR1 |= SPI_CR1_SPE;
-    /*
-    configure_adas1000();
-    HAL_Delay(3000);
-    uint32_t data;
-    while(1)
-	{
-		read register 0x40 (frame header), initiate frame reading
-		synchronize();
-        write_4byte_word(((uint32_t)0x40) << 24);
-        data = read_4byte_word();
-        data = read_control_register(0x40);
-	}
-	//*/
 
     // here are tests
     /*
@@ -245,7 +232,7 @@ int main(void)
     {
         frame_ring_buffer_task();
         ecg_ring_buffer_task();
-        //isoline_calculation_task();
+        isoline_calculation_task();
 		//acc_data_read_task();
     }
     //return (UnityEnd());
@@ -281,7 +268,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLR            = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
-    //Error_Handler();
+    Error_Handler();
   }
 
   //* Enable MSI Auto-calibration through LSE
@@ -301,8 +288,30 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
   {
-    //Error_Handler();
+    Error_Handler();
   }
 }
 //*/
+
+
+void Error_Handler()
+{
+	volatile long i;
+
+	HAL_GPIO_WritePin(GPIOA, green_led_odrain_Pin, GPIO_PIN_SET);
+
+	while(1)
+	{
+		for(i=0; i<500000; i++);
+		HAL_GPIO_TogglePin(GPIOA, red_led_odrain_Pin);
+		for(i=0; i<500000; i++);
+		HAL_GPIO_TogglePin(GPIOA, red_led_odrain_Pin);
+	}
+}
+
+
+
+
+
+
 
