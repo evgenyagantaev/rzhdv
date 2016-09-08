@@ -44,8 +44,11 @@
 #include "timer250hz.h"
 #include "frame_ring_buffer.h"
 #include "ecg_ring_buffer.h"
+#include "ecg_ring_buffer_task.h"
 #include "frame_ring_buffer_task.h"
+#include "isoline_calculation_task.h"
 #include "acc_data_read_task.h"
+#include "qrs_detection_task.h"
 // here code to test
 //#include "ProductionCode.h"
 
@@ -233,6 +236,7 @@ int main(void)
         frame_ring_buffer_task();
         ecg_ring_buffer_task();
         isoline_calculation_task();
+        qrs_detection_task();
 		//acc_data_read_task();
     }
     //return (UnityEnd());

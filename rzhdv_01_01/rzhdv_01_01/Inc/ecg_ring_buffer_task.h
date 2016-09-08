@@ -13,4 +13,6 @@
 
 static uint32_t local_frame_copy[ADAS_FRAME_LENGTH];
 
+void ecg_ring_buffer_task();
+
 #endif /* INC_ECG_RING_BUFFER_TASK_H_ */

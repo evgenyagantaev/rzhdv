@@ -57,6 +57,8 @@
 "Src/isoline_calculation_task.o"
 "Src/iwdg.o"
 "Src/putchar.o"
+"Src/qrs_detection_task.o"
+"Src/qrs_obj.o"
 "Src/smb380.o"
 "Src/spi.o"
 "Src/spi_low_level.o"

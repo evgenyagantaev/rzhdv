@@ -9,6 +9,7 @@
 #include "ecg_ring_buffer.h"
 #include "frame_ring_buffer.h"
 #include "isoline.h"
+#include "qrs_obj.h"
 //debug
 #include "usart.h"
 extern UART_HandleTypeDef huart1;
@@ -23,6 +24,7 @@ void ecg_ring_buffer_task()
 		uint32_t sample = local_frame_copy[1]&((uint32_t)0x00ffffff);
 		ecg_ring_buffer_push(sample);
 		isoline_add_new_sample(sample);
+
 		//debug
 		/*
 		if((GPIOB->IDR & GPIO_PIN_0) == GPIO_PIN_RESET)

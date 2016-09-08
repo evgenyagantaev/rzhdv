@@ -23,12 +23,18 @@ void isoline_calculation_task()
 		calculate_isoline_value();
 		set_new_sample_flag(0); // drop flag
 
+		int32_t ecg = get_last_sample() - get_isoline_value();
+		//int32_t ecg = get_isoline_value();
+		//int32_t ecg = get_last_sample();
+		qrs_add_new_sample(ecg);
+
 		// debug
-		sprintf(message, "%dI%d\r\n", get_last_sample(), get_isoline_value());
+		sprintf(message, "%dI%d\r\n", ecg, ecg);
+		//sprintf(message, "%dI%d\r\n", get_last_sample(), get_isoline_value());
 		//sprintf(message, "%dI%d\r\n", get_isoline_value(), get_isoline_value());
 		HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
 		//debug
-		//*
+		/*
 		if((GPIOB->IDR & GPIO_PIN_0) == GPIO_PIN_RESET)
 			GPIOB->BSRR = (uint32_t)GPIO_PIN_0;
 		else

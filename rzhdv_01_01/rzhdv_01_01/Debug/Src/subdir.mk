@@ -21,6 +21,8 @@ C_SRCS += \
 ../Src/isoline_calculation_task.c \
 ../Src/iwdg.c \
 ../Src/putchar.c \
+../Src/qrs_detection_task.c \
+../Src/qrs_obj.c \
 ../Src/smb380.c \
 ../Src/spi.c \
 ../Src/spi_low_level.c \
@@ -52,6 +54,8 @@ OBJS += \
 ./Src/isoline_calculation_task.o \
 ./Src/iwdg.o \
 ./Src/putchar.o \
+./Src/qrs_detection_task.o \
+./Src/qrs_obj.o \
 ./Src/smb380.o \
 ./Src/spi.o \
 ./Src/spi_low_level.o \
@@ -83,6 +87,8 @@ C_DEPS += \
 ./Src/isoline_calculation_task.d \
 ./Src/iwdg.d \
 ./Src/putchar.d \
+./Src/qrs_detection_task.d \
+./Src/qrs_obj.d \
 ./Src/smb380.d \
 ./Src/spi.d \
 ./Src/spi_low_level.d \
