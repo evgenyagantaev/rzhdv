@@ -9,7 +9,6 @@
 #include "ecg_ring_buffer.h"
 #include "frame_ring_buffer.h"
 #include "isoline.h"
-#include "qrs_obj.h"
 //debug
 #include "usart.h"
 extern UART_HandleTypeDef huart1;

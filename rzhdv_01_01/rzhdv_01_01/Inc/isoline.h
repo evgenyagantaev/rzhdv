@@ -10,8 +10,8 @@
 
 #include "stdint.h"
 
-#define ISOLINE_BUFFER_LENGTH 13
-#define CUT_EDGES 3
+#define ISOLINE_BUFFER_LENGTH 21
+#define CUT_EDGES 5
 
 static uint32_t current_isoline;
 

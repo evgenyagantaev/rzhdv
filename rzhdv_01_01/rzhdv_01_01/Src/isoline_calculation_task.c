@@ -7,6 +7,8 @@
 
 #include <isoline.h>
 #include "isoline_calculation_task.h"
+#include "ecg_ring_buffer.h"
+#include "qrs_obj.h"
 
 //debug
 #include "usart.h"
@@ -22,16 +24,17 @@ void isoline_calculation_task()
 	{
 		calculate_isoline_value();
 		set_new_sample_flag(0); // drop flag
-
-		int32_t ecg = get_last_sample() - get_isoline_value();
-		//int32_t ecg = get_isoline_value();
-		//int32_t ecg = get_last_sample();
-		qrs_add_new_sample(ecg);
+		int32_t last_sample = get_last_sample();
+		int32_t isoline_value = get_isoline_value();
+		//int32_t ecg = last_sample - isoline_value;
+		int32_t ecg = isoline_value;
+		qrs_add_new_sample(last_sample);
+		qrs_add_new_isoline(isoline_value);
+		qrs_add_order_number(get_received_ecg_samples_counter());
 
 		// debug
+		/*
 		sprintf(message, "%dI%d\r\n", ecg, ecg);
-		//sprintf(message, "%dI%d\r\n", get_last_sample(), get_isoline_value());
-		//sprintf(message, "%dI%d\r\n", get_isoline_value(), get_isoline_value());
 		HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
 		//debug
 		/*

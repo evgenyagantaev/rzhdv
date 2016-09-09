@@ -71,9 +71,9 @@ void sort(uint32_t *array, int LENGTH)
 {
 	int i, j;
 
-	for(i=(LENGTH-1); i>0; i--)
+	for(i=LENGTH; i>0; i--)
 	{
-		for(j=1; j<2; j++)
+		for(j=1; j<i; j++)
 		{
 			if(array[j]<array[j-1])	// gonim maksimalnyi vverh
 			{
