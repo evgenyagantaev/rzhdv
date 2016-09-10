@@ -49,6 +49,8 @@
 #include "isoline_calculation_task.h"
 #include "acc_data_read_task.h"
 #include "qrs_detection_task.h"
+#include "heart_rate_obj.h"
+#include "heart_rate_calculation_task.h"
 // here code to test
 //#include "ProductionCode.h"
 
@@ -231,12 +233,14 @@ int main(void)
 	timer250hz_start();
 
 	configure_adas1000();
+	heart_rate_init();
     while(1)
     {
         frame_ring_buffer_task();
         ecg_ring_buffer_task();
         isoline_calculation_task();
         qrs_detection_task();
+        heart_rate_calculation_task();
 		//acc_data_read_task();
     }
     //return (UnityEnd());

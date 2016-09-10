@@ -24,11 +24,7 @@ static const uint16_t EMPTYMARKER = 0;
 static const uint16_t WHITEMARKER = 1;
 static const uint16_t REDMARKER = 2;
 static const uint16_t BLUEMARKER = 3;
-// heart rate buffers length
-static const uint16_t REGULARANDQUARANTINEBUFFERLENGTH = 5;
-// maximum appropriate deviation of heart rate from mean value of buffer
-// (percents)
-static const uint16_t MAXHEARTRATEDEVIATION = 10;
+
 static const uint16_t QRSSUSPENDPERIOD = 60;
 
 
@@ -56,8 +52,10 @@ static int r_max_index;
 
 // marker of the newest detected r-pick
 static int r_marker;
-    // marker of the old detected r-pick
+// marker of the old detected r-pick
 static int old_rmarker;
+static uint32_t new_rr_interval = 0;
+static int new_rr_interval_calculated_flag = 0;
 
 // flag that indicates, is local buffer ready for analysis or not
 static int local_buffer_ready_flag;
@@ -65,11 +63,16 @@ static int local_buffer_ready_flag;
 static int qrs_buffer_counter;
 
 
+
 void qrs_add_new_sample(int32_t new_sample);
 void qrs_add_new_isoline(int32_t isoline_value);
 void qrs_add_order_number(uint32_t received_ecg_samples_counter);
 int qrs_get_new_sample_flag();
 void qrs_set_new_sample_flag(int flag);
+
+int get_new_rr_interval_flag();
+void set_new_rr_interval_flag(int flag);
+uint32_t qrs_get_new_rr_interval();
 
 void qrs_shift_array(int32_t *array, int LENGTH);
 

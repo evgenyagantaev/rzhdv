@@ -53,6 +53,8 @@
 "Src/frame_ring_buffer_task.o"
 "Src/freertos.o"
 "Src/gpio.o"
+"Src/heart_rate_calculation_task.o"
+"Src/heart_rate_obj.o"
 "Src/isoline.o"
 "Src/isoline_calculation_task.o"
 "Src/iwdg.o"

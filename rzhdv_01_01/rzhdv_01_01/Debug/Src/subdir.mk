@@ -17,6 +17,8 @@ C_SRCS += \
 ../Src/frame_ring_buffer_task.c \
 ../Src/freertos.c \
 ../Src/gpio.c \
+../Src/heart_rate_calculation_task.c \
+../Src/heart_rate_obj.c \
 ../Src/isoline.c \
 ../Src/isoline_calculation_task.c \
 ../Src/iwdg.c \
@@ -50,6 +52,8 @@ OBJS += \
 ./Src/frame_ring_buffer_task.o \
 ./Src/freertos.o \
 ./Src/gpio.o \
+./Src/heart_rate_calculation_task.o \
+./Src/heart_rate_obj.o \
 ./Src/isoline.o \
 ./Src/isoline_calculation_task.o \
 ./Src/iwdg.o \
@@ -83,6 +87,8 @@ C_DEPS += \
 ./Src/frame_ring_buffer_task.d \
 ./Src/freertos.d \
 ./Src/gpio.d \
+./Src/heart_rate_calculation_task.d \
+./Src/heart_rate_obj.d \
 ./Src/isoline.d \
 ./Src/isoline_calculation_task.d \
 ./Src/iwdg.d \

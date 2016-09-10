@@ -68,6 +68,19 @@ void qrs_set_new_sample_flag(int flag)
 	qrs_new_sample_added_flag = flag;
 }
 
+int get_new_rr_interval_flag()
+{
+	return new_rr_interval_calculated_flag;
+}
+void set_new_rr_interval_flag(int flag)
+{
+	new_rr_interval_calculated_flag = flag;
+}
+uint32_t qrs_get_new_rr_interval()
+{
+	return new_rr_interval;
+}
+
 void qrs_shift_array(int32_t *array, int LENGTH)
 {
 	int i;
@@ -186,13 +199,18 @@ void qrsDetect(void)
 			old_rmarker = r_marker;
 			r_marker = order_numbers[r_max_index];
 
-			int heart_rate = 60000 / ((r_marker - old_rmarker)*4);
-			//debug
-			char message[64];  // remove when not debugging
+			new_rr_interval = (r_marker - old_rmarker)*4;
+			new_rr_interval_calculated_flag = 1;
+
+			/*
 			// debug
-			//*
-			sprintf(message, "c1p%03dm5t366r0014G\r\n", heart_rate);
-			HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
+			if(new_rr_interval != 0)
+			{
+				int heart_rate = 60000 / new_rr_interval;
+				char message[64];  // remove when not debugging
+				sprintf(message, "c1p%03dm5t366r0014G\r\n", heart_rate);
+				HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
+			}
 			//*/
 
 			// reset of asystoly counter
