@@ -38,13 +38,6 @@ void qrs_detection_task()
 		//*/
 		//debug
 
-		//debug
-		//*
-		if((GPIOB->IDR & GPIO_PIN_0) == GPIO_PIN_RESET)
-			GPIOB->BSRR = (uint32_t)GPIO_PIN_0;
-		else
-			GPIOB->BRR = (uint32_t)GPIO_PIN_0;
-		//*/
 
 	}
 }

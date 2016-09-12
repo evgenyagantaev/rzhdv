@@ -231,6 +231,7 @@ int main(void)
     //*/
 
 	timer250hz_start();
+	timer100hz_start();
 
 	configure_adas1000();
 	heart_rate_init();

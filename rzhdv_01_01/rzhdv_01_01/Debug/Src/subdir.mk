@@ -34,6 +34,8 @@ C_SRCS += \
 ../Src/tim.c \
 ../Src/timer250hz.c \
 ../Src/timer250hz_irqhandler.c \
+../Src/timer_100hz_irqhandler.c \
+../Src/timer_100hz_obj.c \
 ../Src/usart.c \
 ../Src/usbd_conf.c \
 ../Src/usbd_desc.c 
@@ -69,6 +71,8 @@ OBJS += \
 ./Src/tim.o \
 ./Src/timer250hz.o \
 ./Src/timer250hz_irqhandler.o \
+./Src/timer_100hz_irqhandler.o \
+./Src/timer_100hz_obj.o \
 ./Src/usart.o \
 ./Src/usbd_conf.o \
 ./Src/usbd_desc.o 
@@ -104,6 +108,8 @@ C_DEPS += \
 ./Src/tim.d \
 ./Src/timer250hz.d \
 ./Src/timer250hz_irqhandler.d \
+./Src/timer_100hz_irqhandler.d \
+./Src/timer_100hz_obj.d \
 ./Src/usart.d \
 ./Src/usbd_conf.d \
 ./Src/usbd_desc.d 

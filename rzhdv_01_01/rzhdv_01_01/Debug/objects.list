@@ -70,6 +70,8 @@
 "Src/tim.o"
 "Src/timer250hz.o"
 "Src/timer250hz_irqhandler.o"
+"Src/timer_100hz_irqhandler.o"
+"Src/timer_100hz_obj.o"
 "Src/usart.o"
 "Src/usbd_conf.o"
 "Src/usbd_desc.o"

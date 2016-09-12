@@ -16,7 +16,5 @@ void TIM3_IRQHandler(void)
         else
         	GPIOB->BRR = (uint32_t)GPIO_PIN_0;
         //*/
-        //HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
-        //HAL_GPIO_TogglePin(GPIOA, red_led_odrain_Pin);
     }
 }

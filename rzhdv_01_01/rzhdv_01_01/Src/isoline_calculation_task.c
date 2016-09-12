@@ -10,9 +10,6 @@
 #include "ecg_ring_buffer.h"
 #include "qrs_obj.h"
 
-//debug
-#include "usart.h"
-extern UART_HandleTypeDef huart1;
 
 
 void isoline_calculation_task()
@@ -32,17 +29,6 @@ void isoline_calculation_task()
 		qrs_add_new_isoline(isoline_value);
 		qrs_add_order_number(get_received_ecg_samples_counter());
 
-		// debug
-		/*
-		sprintf(message, "%dI%d\r\n", ecg, ecg);
-		HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
-		//debug
-		/*
-		if((GPIOB->IDR & GPIO_PIN_0) == GPIO_PIN_RESET)
-			GPIOB->BSRR = (uint32_t)GPIO_PIN_0;
-		else
-			GPIOB->BRR = (uint32_t)GPIO_PIN_0;
-		//*/
 	}
 }
 
