@@ -21,7 +21,7 @@ static int16_t averaging_z_buffer[ACC_BUFFER_LENGTH];
 // Method adds samples in buffers for analysis
 void add_acc_samples(int16_t x, int16_t y, int16_t z);
 
-
+uint32_t acc_buffer_get_received_samples_counter();
 
 
 
