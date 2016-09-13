@@ -230,11 +230,14 @@ int main(void)
     }
     //*/
 
-	timer250hz_start();
-	timer100hz_start();
-
 	configure_adas1000();
+	frame_ring_buffer_initialization();
 	heart_rate_init();
+	smb380_write_settings();
+
+	timer100hz_start();
+	timer250hz_start();
+
     while(1)
     {
         frame_ring_buffer_task();
@@ -242,7 +245,7 @@ int main(void)
         isoline_calculation_task();
         qrs_detection_task();
         heart_rate_calculation_task();
-		//acc_data_read_task();
+		acc_data_read_task();
     }
     //return (UnityEnd());
 }

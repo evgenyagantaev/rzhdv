@@ -24,7 +24,7 @@ void qrs_detection_task()
 		//debug
 		char message[64];  // remove when not debugging
 		// debug
-		//*
+		/*
 		sprintf(message, "%dI%d\r\n", qrs_window[0], isoline_window[0]);
 		//sprintf(message, "%dI%d\r\n", qrs_window[0], qrs_window[0]);
 		//sprintf(message, "%dI%d\r\n", isoline_window[0], isoline_window[0]);

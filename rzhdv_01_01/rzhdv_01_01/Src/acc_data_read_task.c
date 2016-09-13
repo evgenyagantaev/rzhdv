@@ -8,6 +8,8 @@
 #include "acc_data_read_task.h"
 #include "smb380.h"
 #include "stdint.h"
+#include "acc_data_buffer_obj.h"
+
 
 //debug
 #include "acc_spi_low_level.h"
@@ -38,6 +40,8 @@ void acc_data_read_task()
 	rawT=(rawT>>1) - 30;
 
 	lsb =0;
+
+	add_acc_samples(rawX, rawY, rawZ);
 
 	//debug
 	//acc_spi_write_2byte_word(0x55);

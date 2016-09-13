@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Src/acc_data_buffer_obj.c \
 ../Src/acc_data_read_task.c \
 ../Src/acc_spi_low_level.c \
 ../Src/adas1000.c \
@@ -41,6 +42,7 @@ C_SRCS += \
 ../Src/usbd_desc.c 
 
 OBJS += \
+./Src/acc_data_buffer_obj.o \
 ./Src/acc_data_read_task.o \
 ./Src/acc_spi_low_level.o \
 ./Src/adas1000.o \
@@ -78,6 +80,7 @@ OBJS += \
 ./Src/usbd_desc.o 
 
 C_DEPS += \
+./Src/acc_data_buffer_obj.d \
 ./Src/acc_data_read_task.d \
 ./Src/acc_spi_low_level.d \
 ./Src/adas1000.d \
