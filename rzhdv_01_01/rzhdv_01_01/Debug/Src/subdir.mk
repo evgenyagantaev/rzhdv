@@ -23,6 +23,7 @@ C_SRCS += \
 ../Src/isoline.c \
 ../Src/isoline_calculation_task.c \
 ../Src/iwdg.c \
+../Src/movement_detector_obj.c \
 ../Src/putchar.c \
 ../Src/qrs_detection_task.c \
 ../Src/qrs_obj.c \
@@ -37,6 +38,8 @@ C_SRCS += \
 ../Src/timer250hz_irqhandler.c \
 ../Src/timer_100hz_irqhandler.c \
 ../Src/timer_100hz_obj.c \
+../Src/timer_1hz_irqhandler.c \
+../Src/timer_1hz_obj.c \
 ../Src/usart.c \
 ../Src/usbd_conf.c \
 ../Src/usbd_desc.c 
@@ -61,6 +64,7 @@ OBJS += \
 ./Src/isoline.o \
 ./Src/isoline_calculation_task.o \
 ./Src/iwdg.o \
+./Src/movement_detector_obj.o \
 ./Src/putchar.o \
 ./Src/qrs_detection_task.o \
 ./Src/qrs_obj.o \
@@ -75,6 +79,8 @@ OBJS += \
 ./Src/timer250hz_irqhandler.o \
 ./Src/timer_100hz_irqhandler.o \
 ./Src/timer_100hz_obj.o \
+./Src/timer_1hz_irqhandler.o \
+./Src/timer_1hz_obj.o \
 ./Src/usart.o \
 ./Src/usbd_conf.o \
 ./Src/usbd_desc.o 
@@ -99,6 +105,7 @@ C_DEPS += \
 ./Src/isoline.d \
 ./Src/isoline_calculation_task.d \
 ./Src/iwdg.d \
+./Src/movement_detector_obj.d \
 ./Src/putchar.d \
 ./Src/qrs_detection_task.d \
 ./Src/qrs_obj.d \
@@ -113,6 +120,8 @@ C_DEPS += \
 ./Src/timer250hz_irqhandler.d \
 ./Src/timer_100hz_irqhandler.d \
 ./Src/timer_100hz_obj.d \
+./Src/timer_1hz_irqhandler.d \
+./Src/timer_1hz_obj.d \
 ./Src/usart.d \
 ./Src/usbd_conf.d \
 ./Src/usbd_desc.d 

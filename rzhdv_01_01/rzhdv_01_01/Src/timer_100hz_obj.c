@@ -13,10 +13,10 @@ void timer100hz_start(void)
 {
     timer100hz_tick = 0;
 
-    /*Configure the TIM3 IRQ priority */
+    /*Configure the TIM2 IRQ priority */
     HAL_NVIC_SetPriority(TIM2_IRQn, 2 ,0);
 
-    /* Enable the TIM3 global Interrupt */
+    /* Enable the TIM2 global Interrupt */
     HAL_NVIC_EnableIRQ(TIM2_IRQn);
 
     // enable update irq
@@ -34,6 +34,14 @@ void timer100hz_start(void)
 void timer100hz_increment_tick()
 {
     timer100hz_tick++;
+
+    //debug
+	//*
+	if((GPIOB->IDR & GPIO_PIN_0) == GPIO_PIN_RESET)
+		GPIOB->BSRR = (uint32_t)GPIO_PIN_0;
+	else
+		GPIOB->BRR = (uint32_t)GPIO_PIN_0;
+	//*/
 }
 
 uint32_t timer100hz_get_tick()

@@ -42,6 +42,7 @@
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim4;
 
 /* TIM1 init function */
 void MX_TIM1_Init(void)
@@ -108,6 +109,27 @@ void MX_TIM3_Init(void)
   HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig);
 
 }
+/* TIM3 init function */
+void MX_TIM4_Init(void)
+{
+  TIM_ClockConfigTypeDef sClockSourceConfig;
+  TIM_MasterConfigTypeDef sMasterConfig;
+
+  htim3.Instance = TIM4;
+  htim3.Init.Prescaler = 0;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 0;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  HAL_TIM_Base_Init(&htim4);
+
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  HAL_TIM_ConfigClockSource(&htim4, &sClockSourceConfig);
+
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig);
+
+}
 
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
 {
@@ -145,6 +167,11 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
 
   /* USER CODE END TIM3_MspInit 1 */
   }
+  else if(htim_base->Instance==TIM4)
+    {
+      /* Peripheral clock enable */
+      __HAL_RCC_TIM4_CLK_ENABLE();
+    }
 }
 
 void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)

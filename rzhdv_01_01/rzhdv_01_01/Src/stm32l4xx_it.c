@@ -18,7 +18,8 @@ extern TIM_HandleTypeDef htim4;
 */
 void SysTick_Handler(void)
 {
-  osSystickHandler();
+	//osSystickHandler();
+	HAL_IncTick();
 }
 
 /******************************************************************************/
@@ -31,9 +32,9 @@ void SysTick_Handler(void)
 /**
 * @brief This function handles TIM4 global interrupt.
 */
-void TIM4_IRQHandler(void)
-{
-  HAL_TIM_IRQHandler(&htim4);
+//void TIM4_IRQHandler(void)
+//{
+  //HAL_TIM_IRQHandler(&htim4);
   //debug
   /*
   if((GPIOB->IDR & GPIO_PIN_0) == GPIO_PIN_RESET)
@@ -41,7 +42,7 @@ void TIM4_IRQHandler(void)
   else
 	GPIOB->BRR = (uint32_t)GPIO_PIN_0;
   //*/
-}
+//}
 
 /**
 * @brief This function handles USB OTG FS global interrupt.

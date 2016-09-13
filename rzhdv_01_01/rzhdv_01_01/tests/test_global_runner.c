@@ -42,6 +42,8 @@
 #include "configure_adas1000.h"
 #include "adas1000_get_save_frame.h"
 #include "timer250hz.h"
+#include "timer_100hz_obj.h"
+#include "timer_1hz_obj.h"
 #include "frame_ring_buffer.h"
 #include "ecg_ring_buffer.h"
 #include "ecg_ring_buffer_task.h"
@@ -139,9 +141,10 @@ int main(void)
     MX_IWDG_Init();
     MX_SPI1_Init();
     MX_SPI2_Init();
-    MX_TIM1_Init();
+    //MX_TIM1_Init();
     MX_TIM2_Init();
     MX_TIM3_Init();
+    //MX_TIM4_Init();
     MX_ADC1_Init();
     MX_USART1_UART_Init();
     MX_USART2_UART_Init();
@@ -235,6 +238,7 @@ int main(void)
 	heart_rate_init();
 	smb380_write_settings();
 
+	//timer1hz_start();
 	timer100hz_start();
 	timer250hz_start();
 
