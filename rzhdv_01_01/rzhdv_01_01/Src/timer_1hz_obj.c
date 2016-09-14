@@ -26,9 +26,9 @@ void timer1hz_start(void)
     TIM4->DIER |= TIM_DIER_UIE;
 
     // prescaler value 79; counter frequency = 1MHz
-    TIM4->PSC = (uint32_t)79; // 1KHz
+    TIM4->PSC = (uint32_t)19999; // 1KHz
     // auto reload value 10000; period = 1 Sec
-    TIM4->ARR = (uint16_t)10000;
+    TIM4->ARR = (uint16_t)4000;
 
     // enable timer counter (start count)
     TIM4->CR1 |= TIM_CR1_CEN;

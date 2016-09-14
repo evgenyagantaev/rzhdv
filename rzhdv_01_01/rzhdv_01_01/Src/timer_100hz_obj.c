@@ -36,7 +36,7 @@ void timer100hz_increment_tick()
     timer100hz_tick++;
 
     //debug
-	//*
+	/*
 	if((GPIOB->IDR & GPIO_PIN_0) == GPIO_PIN_RESET)
 		GPIOB->BSRR = (uint32_t)GPIO_PIN_0;
 	else

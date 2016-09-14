@@ -144,7 +144,7 @@ int main(void)
     //MX_TIM1_Init();
     MX_TIM2_Init();
     MX_TIM3_Init();
-    //MX_TIM4_Init();
+    MX_TIM4_Init();
     MX_ADC1_Init();
     MX_USART1_UART_Init();
     MX_USART2_UART_Init();
@@ -238,7 +238,7 @@ int main(void)
 	heart_rate_init();
 	smb380_write_settings();
 
-	//timer1hz_start();
+	timer1hz_start();
 	timer100hz_start();
 	timer250hz_start();
 

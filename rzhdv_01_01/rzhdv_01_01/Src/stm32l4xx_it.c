@@ -16,10 +16,17 @@ extern TIM_HandleTypeDef htim4;
 /**
 * @brief This function handles System tick timer.
 */
+extern __IO uint32_t uwTick;
 void SysTick_Handler(void)
 {
 	//osSystickHandler();
-	HAL_IncTick();
+	//HAL_IncTick();
+	uwTick++;
+}
+
+uint32_t HAL_GetTick(void)
+{
+  return uwTick;
 }
 
 /******************************************************************************/
