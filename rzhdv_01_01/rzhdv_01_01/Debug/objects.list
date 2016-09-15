@@ -59,6 +59,7 @@
 "Src/isoline.o"
 "Src/isoline_calculation_task.o"
 "Src/iwdg.o"
+"Src/movement_detection_task.o"
 "Src/movement_detector_obj.o"
 "Src/putchar.o"
 "Src/qrs_detection_task.o"

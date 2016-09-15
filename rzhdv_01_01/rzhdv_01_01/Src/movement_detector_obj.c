@@ -7,6 +7,7 @@
 
 #include "movement_detector_obj.h"
 #include "timer250hz.h"
+#include "timer_1hz_obj.h"
 
 
 //********************* private functions **********************************
@@ -101,261 +102,261 @@ void addAccSamples(int x, int y, int z)
 
 
 // Method detects a movement
-   void movementDetection(void)
-   {
-      // calculate mean values of acceleration
-      meanX = xIntegral/ACCELBUFFERLENGTH;
-      meanY = yIntegral/ACCELBUFFERLENGTH;
-      meanZ = zIntegral/ACCELBUFFERLENGTH;
+void movementDetection(void)
+{
+  // calculate mean values of acceleration
+  meanX = xIntegral/ACCELBUFFERLENGTH;
+  meanY = yIntegral/ACCELBUFFERLENGTH;
+  meanZ = zIntegral/ACCELBUFFERLENGTH;
 
-      // calculate min values of acceleration
-      minX = minArray(averagingXbuffer, ACCELBUFFERLENGTH);
-      minY = minArray(averagingYbuffer, ACCELBUFFERLENGTH);
-      minZ = minArray(averagingZbuffer, ACCELBUFFERLENGTH);
+  // calculate min values of acceleration
+  minX = minArray(averagingXbuffer, ACCELBUFFERLENGTH);
+  minY = minArray(averagingYbuffer, ACCELBUFFERLENGTH);
+  minZ = minArray(averagingZbuffer, ACCELBUFFERLENGTH);
 
-      // calculate max values of acceleration
-      maxX = maxArray(averagingXbuffer, ACCELBUFFERLENGTH);
-      maxY = maxArray(averagingYbuffer, ACCELBUFFERLENGTH);
-      maxZ = maxArray(averagingZbuffer, ACCELBUFFERLENGTH);
+  // calculate max values of acceleration
+  maxX = maxArray(averagingXbuffer, ACCELBUFFERLENGTH);
+  maxY = maxArray(averagingYbuffer, ACCELBUFFERLENGTH);
+  maxZ = maxArray(averagingZbuffer, ACCELBUFFERLENGTH);
 
-      // calculate span on every axis
-      spanX = abs(maxX - minX);
-      spanY = abs(maxY - minY);
-      spanZ = abs(maxZ - minZ);
+  // calculate span on every axis
+  spanX = abs(maxX - minX);
+  spanY = abs(maxY - minY);
+  spanZ = abs(maxZ - minZ);
 
-      // detect motion
-      //****************************************************
-      if(!runningDetected && !walkingDetected)
-      {
-         if((spanX>highActivityThreshold)||(spanY>highActivityThreshold)||
-            (spanZ>highActivityThreshold)) // high activity detected
-         {
-                 // детектирована высокая двигательная активность
-                 // в текущей версии в этом случае ничего не делаем
+  // detect motion
+  //****************************************************
+  if(!runningDetected && !walkingDetected)
+  {
+	 if((spanX>highActivityThreshold)||(spanY>highActivityThreshold)||
+		(spanZ>highActivityThreshold)) // high activity detected
+	 {
+			 // детектирована высокая двигательная активность
+			 // в текущей версии в этом случае ничего не делаем
 
-                 //*****************************************************
-                 // запоминаем текущее значение секундного таймера
-                 //common.highMovementMarker = common.secondsTimer;
-                 // drop low activity flag
-                 lowMovementDetected = 0;
-                 // set high activity flag
-                 highMovementDetected = 1;
-                 position = 8;
+			 //*****************************************************
+			 // запоминаем текущее значение секундного таймера
+			 //common.highMovementMarker = common.secondsTimer;
+			 // drop low activity flag
+			 lowMovementDetected = 0;
+			 // set high activity flag
+			 highMovementDetected = 1;
+			 position = 8;
 
-         }
-         else if((spanX>lowActivityThreshold)||(spanY>lowActivityThreshold)||
-            (spanZ>lowActivityThreshold)) // low activity detected
-         {
-                 if(!highMovementDetected) //если ранее не была зарегистрирована высокая двигательная активность
-                 {
-                         // детектирована низкая двигательная активность
-                         // в текущей версии в этом случае ничего не делаем
+	 }
+	 else if((spanX>lowActivityThreshold)||(spanY>lowActivityThreshold)||
+		(spanZ>lowActivityThreshold)) // low activity detected
+	 {
+			 if(!highMovementDetected) //если ранее не была зарегистрирована высокая двигательная активность
+			 {
+					 // детектирована низкая двигательная активность
+					 // в текущей версии в этом случае ничего не делаем
 
-                         //*******************************************************
-                         // запоминаем текущее значение секундного таймера
-                         //common.lowMovementMarker = common.secondsTimer;
-                         // устанавливаем флаг низкой двигательной активности
-                         // set low activity flag
-                        lowMovementDetected = 1;
-                        // drop high activity flag
-                        highMovementDetected = 0;
-                        position = 7;
-                 }
-         }
-         else
-         {
-            // drop low activity flag
-            lowMovementDetected = 0;
-            // drop high activity flag
-            highMovementDetected = 0;
-         }
-      }//end if(!runningDetected && !walkingDetected)
-      //******************************************************
-      // end detect motion
+					 //*******************************************************
+					 // запоминаем текущее значение секундного таймера
+					 //common.lowMovementMarker = common.secondsTimer;
+					 // устанавливаем флаг низкой двигательной активности
+					 // set low activity flag
+					lowMovementDetected = 1;
+					// drop high activity flag
+					highMovementDetected = 0;
+					position = 7;
+			 }
+	 }
+	 else
+	 {
+		// drop low activity flag
+		lowMovementDetected = 0;
+		// drop high activity flag
+		highMovementDetected = 0;
+	 }
+  }//end if(!runningDetected && !walkingDetected)
+  //******************************************************
+  // end detect motion
 
-      // detect walking/running
-      //***********************************************************************
-      // детектируем шаг/бег
-      //*****************************************************************************
+  // detect walking/running
+  //***********************************************************************
+  // детектируем шаг/бег
+  //*****************************************************************************
 
-      newX = averagingXbuffer[ACCELBUFFERLENGTH - 1];
-/*
-      if((abs(newX-meanXlevel) > runThreshold) && !runStepDetected)
-      {
-            if((timer250hz_get_tick() - lastRunStepTimerMarker) > runStepInterval)
-            {
-                    runStepCounter++;
-                    noLocomotionDetected = 0;
-                    noLocomotionMarker = common.secondsTimer;
-                    detectWalking = 0;
+  newX = averagingXbuffer[ACCELBUFFERLENGTH - 1];
+//*
+  if((abs(newX-meanXlevel) > runThreshold) && !runStepDetected)
+  {
+		if((timer250hz_get_tick() - lastRunStepTimerMarker) > runStepInterval)
+		{
+				runStepCounter++;
+				noLocomotionDetected = 0;
+				noLocomotionMarker = timer1hz_get_tick();
+				detectWalking = 0;
 
-                    //debug (blue marker)
-                    //sprintf(sampleTxtBuffer, "B\r\n");
-                    //xSemaphoreTake(uartMutex, portMAX_DELAY);
-                    //uart->sendMessage(sampleTxtBuffer);
-                    //xSemaphoreGive(uartMutex);
-            }
+				//debug (blue marker)
+				//sprintf(sampleTxtBuffer, "B\r\n");
+				//xSemaphoreTake(uartMutex, portMAX_DELAY);
+				//uart->sendMessage(sampleTxtBuffer);
+				//xSemaphoreGive(uartMutex);
+		}
 
-            runStepDetected = 1;
-            lastRunStepTimerMarker = common.samplesTimer;
+		runStepDetected = 1;
+		lastRunStepTimerMarker = timer1hz_get_tick();
 
-            if(walkStepDetected)
-            {
-                    walkStepDetected = 0;
-                    walkStepCounter = 0;
+		if(walkStepDetected)
+		{
+				walkStepDetected = 0;
+				walkStepCounter = 0;
 
-                    //debug
-                    //printf("A%d=%d=%d\r\n", positionCalculating.walkStepCounter, positionCalculating.walkingDetected, common.position);
-            }
-
-
-      }
-      //else if(abs(newX - meanXlevel) <= noMovementThreshold)
-      else if((newX - meanXlevel) <= noMovementThreshold)
-            runStepDetected = 0;
-
-      if(detectWalking)	// если не детектирован беговой шаг, детектируем пеший шаг
-      {
-            if((abs(newX-meanXlevel) > walkThreshold) && !walkStepDetected)
-            {
-                    if((common.samplesTimer - lastStepTimerMarker) > stepInterval)
-                    {
-                        walkStepCounter++;
-                        noLocomotionDetected = 0;
-                        noLocomotionMarker = common.secondsTimer;
-
-                        //debug (white marker)
-                        //sprintf(sampleTxtBuffer, "W\r\n");
-                        //xSemaphoreTake(uartMutex, portMAX_DELAY);
-                        //uart->sendMessage(sampleTxtBuffer);
-                        //xSemaphoreGive(uartMutex);
-                    }
-                    walkStepDetected = 1;
-                    lastStepTimerMarker = common.samplesTimer;
+				//debug
+				//printf("A%d=%d=%d\r\n", positionCalculating.walkStepCounter, positionCalculating.walkingDetected, common.position);
+		}
 
 
-            }
-            //else if(abs(newX-meanXlevel) <= noMovementThreshold)
-            else if((newX-meanXlevel) <= noMovementThreshold)
-                    walkStepDetected = 0;
-      }
+  }
+  //else if(abs(newX - meanXlevel) <= noMovementThreshold)
+  else if((newX - meanXlevel) <= noMovementThreshold)
+		runStepDetected = 0;
 
-      if((walkStepCounter >= numberOfStepsToDetect) && !walkingDetected)
-      {
-            walkingDetected = 1;
-            position = 9;
-            if(runningDetected)
-            {
-                    runningDetected = 0;
-                    runStepCounter = 0;
-                    //debug
-                    //printf("L%d=%d\r\n", positionCalculating.runStepCounter, positionCalculating.runningDetected);
-            }
-      }
-      else if((walkStepCounter < numberOfStepsToDetect) && walkingDetected)
-      {
-            walkingDetected = 0;
-      }
-      else if((runStepCounter >= numberOfStepsToDetect) && !runningDetected)
-      {
-            runningDetected = 1;
-            position = 0;
+  if(detectWalking)	// если не детектирован беговой шаг, детектируем пеший шаг
+  {
+		if((abs(newX-meanXlevel) > walkThreshold) && !walkStepDetected)
+		{
+				if((timer250hz_get_tick() - lastStepTimerMarker) > stepInterval)
+				{
+					walkStepCounter++;
+					noLocomotionDetected = 0;
+					noLocomotionMarker = timer1hz_get_tick();
 
-            if(walkingDetected)
-            {
-                    walkingDetected = 0;
-                    walkStepCounter = 0;
-                    //debug
-                    //printf("A%d=%d=%d\r\n", positionCalculating.walkStepCounter, positionCalculating.walkingDetected, common.position);
-            }
-      }
-      else if((runStepCounter < numberOfStepsToDetect) && runningDetected)
-      {
-            runningDetected = 0;
-      }
+					//debug (white marker)
+					//sprintf(sampleTxtBuffer, "W\r\n");
+					//xSemaphoreTake(uartMutex, portMAX_DELAY);
+					//uart->sendMessage(sampleTxtBuffer);
+					//xSemaphoreGive(uartMutex);
+				}
+				walkStepDetected = 1;
+				lastStepTimerMarker = timer250hz_get_tick();
 
-      // если достаточно долго не регистрировалось перемещение
-      if(((common.secondsTimer - noLocomotionMarker) > noLocomotionInterval) && !noLocomotionDetected)
-      {
-            if(walkingDetected || (walkStepCounter > 0))
-            {
-                    walkingDetected = 0;
-                    walkStepCounter = 0;
 
-                    //debug
-                    //printf("A%d=%d=%d\r\n", positionCalculating.walkStepCounter, positionCalculating.walkingDetected, common.position);
-            }
-            if(runningDetected || (runStepCounter > 0))
-            {
-                    runningDetected = 0;
-                    runStepCounter = 0;
+		}
+		//else if(abs(newX-meanXlevel) <= noMovementThreshold)
+		else if((newX-meanXlevel) <= noMovementThreshold)
+				walkStepDetected = 0;
+  }
 
-                            //debug
-                            //printf("L%d=%d\r\n", positionCalculating.runStepCounter, positionCalculating.runningDetected);
-            }
+  if((walkStepCounter >= numberOfStepsToDetect) && !walkingDetected)
+  {
+		walkingDetected = 1;
+		position = 9;
+		if(runningDetected)
+		{
+				runningDetected = 0;
+				runStepCounter = 0;
+				//debug
+				//printf("L%d=%d\r\n", positionCalculating.runStepCounter, positionCalculating.runningDetected);
+		}
+  }
+  else if((walkStepCounter < numberOfStepsToDetect) && walkingDetected)
+  {
+		walkingDetected = 0;
+  }
+  else if((runStepCounter >= numberOfStepsToDetect) && !runningDetected)
+  {
+		runningDetected = 1;
+		position = 0;
 
-            noLocomotionDetected = 1;
-            detectWalking = 1;
-      }
-      // закончили детектирование шага/бега
+		if(walkingDetected)
+		{
+				walkingDetected = 0;
+				walkStepCounter = 0;
+				//debug
+				//printf("A%d=%d=%d\r\n", positionCalculating.walkStepCounter, positionCalculating.walkingDetected, common.position);
+		}
+  }
+  else if((runStepCounter < numberOfStepsToDetect) && runningDetected)
+  {
+		runningDetected = 0;
+  }
 
-      //***********************************************************************
-      // end detect walking/running
+  // если достаточно долго не регистрировалось перемещение
+  if(((timer1hz_get_tick() - noLocomotionMarker) > noLocomotionInterval) && !noLocomotionDetected)
+  {
+		if(walkingDetected || (walkStepCounter > 0))
+		{
+				walkingDetected = 0;
+				walkStepCounter = 0;
 
-      // calculate position
-      if(!highMovementDetected && !lowMovementDetected && !runningDetected && !walkingDetected)
-      {
-             //debug
-             //printf("%d  %d  %d\r\n", common.newX, common.newY, common.newZ);
-             //printf ("Activity:  none\r\n");
+				//debug
+				//printf("A%d=%d=%d\r\n", positionCalculating.walkStepCounter, positionCalculating.walkingDetected, common.position);
+		}
+		if(runningDetected || (runStepCounter > 0))
+		{
+				runningDetected = 0;
+				runStepCounter = 0;
 
-             if((abs(meanZ)>abs(meanX)) && (abs(meanZ)>abs(meanY)))
-             {
-                     if(meanZ<0)
-                     {
-                             // face down
-                             position = 1;
-                     }
-                     else
-                             {
-                             // face up
-                             position = 2;
-                     }
-             }
-             else if((abs(meanY)>abs(meanZ)) && (abs(meanY)>abs(meanX)))
-             {
-                     if(meanY<0)
-                     {
-                             // left side
-                             position = 3;
-                     }
-                     else
-                             {
-                             // right side
-                             position = 4;
-                     }
-             }
-             else if((abs(meanX)>abs(meanZ)) && (abs(meanX)>abs(meanY)))
-             {
-                     if(meanX<0)
-                     {
-                             // head down
-                             position = 6;
-                     }
-                     else
-                             {
-                             // head up
-                             position = 5;
-                     }
-             }
+						//debug
+						//printf("L%d=%d\r\n", positionCalculating.runStepCounter, positionCalculating.runningDetected);
+		}
 
-             // запоминаем последнее положение в состоянии неподвижности
-             lastPosition = position;
+		noLocomotionDetected = 1;
+		detectWalking = 1;
+  }
+  // закончили детектирование шага/бега
 
-      }// end если двигательная активность не зафиксирована
-*/
+  //***********************************************************************
+  // end detect walking/running
 
-   }//end movementDetection
+  // calculate position
+  if(!highMovementDetected && !lowMovementDetected && !runningDetected && !walkingDetected)
+  {
+		 //debug
+		 //printf("%d  %d  %d\r\n", common.newX, common.newY, common.newZ);
+		 //printf ("Activity:  none\r\n");
+
+		 if((abs(meanZ)>abs(meanX)) && (abs(meanZ)>abs(meanY)))
+		 {
+				 if(meanZ<0)
+				 {
+						 // face down
+						 position = 1;
+				 }
+				 else
+						 {
+						 // face up
+						 position = 2;
+				 }
+		 }
+		 else if((abs(meanY)>abs(meanZ)) && (abs(meanY)>abs(meanX)))
+		 {
+				 if(meanY<0)
+				 {
+						 // left side
+						 position = 3;
+				 }
+				 else
+						 {
+						 // right side
+						 position = 4;
+				 }
+		 }
+		 else if((abs(meanX)>abs(meanZ)) && (abs(meanX)>abs(meanY)))
+		 {
+				 if(meanX<0)
+				 {
+						 // head down
+						 position = 6;
+				 }
+				 else
+						 {
+						 // head up
+						 position = 5;
+				 }
+		 }
+
+		 // запоминаем последнее положение в состоянии неподвижности
+		 lastPosition = position;
+
+  }// end если двигательная активность не зафиксирована
+//*/
+
+}//end movementDetection
 
 
 

@@ -237,6 +237,7 @@ int main(void)
 	frame_ring_buffer_initialization();
 	heart_rate_init();
 	smb380_write_settings();
+	movement_detector_initialization();
 
 	timer1hz_start();
 	timer100hz_start();
@@ -250,6 +251,7 @@ int main(void)
         qrs_detection_task();
         heart_rate_calculation_task();
 		acc_data_read_task();
+		movement_detection_task();
     }
     //return (UnityEnd());
 }

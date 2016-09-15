@@ -23,6 +23,7 @@ C_SRCS += \
 ../Src/isoline.c \
 ../Src/isoline_calculation_task.c \
 ../Src/iwdg.c \
+../Src/movement_detection_task.c \
 ../Src/movement_detector_obj.c \
 ../Src/putchar.c \
 ../Src/qrs_detection_task.c \
@@ -64,6 +65,7 @@ OBJS += \
 ./Src/isoline.o \
 ./Src/isoline_calculation_task.o \
 ./Src/iwdg.o \
+./Src/movement_detection_task.o \
 ./Src/movement_detector_obj.o \
 ./Src/putchar.o \
 ./Src/qrs_detection_task.o \
@@ -105,6 +107,7 @@ C_DEPS += \
 ./Src/isoline.d \
 ./Src/isoline_calculation_task.d \
 ./Src/iwdg.d \
+./Src/movement_detection_task.d \
 ./Src/movement_detector_obj.d \
 ./Src/putchar.d \
 ./Src/qrs_detection_task.d \

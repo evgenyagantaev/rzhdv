@@ -9,6 +9,7 @@
 #include "smb380.h"
 #include "stdint.h"
 #include "acc_data_buffer_obj.h"
+#include "movement_detector_obj.h"
 
 
 //debug
@@ -45,7 +46,7 @@ void acc_data_read_task()
 		lsb =0;
 
 		add_acc_samples(rawX, rawY, rawZ);
-
+		addAccSamples(rawX, rawY, rawZ);
 
 	}
 }
