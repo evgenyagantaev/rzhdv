@@ -365,6 +365,18 @@ void movementDetection(void)
 }//end movementDetection
 
 
+//************************ properties ***************************************
+int getWalkingStatus()
+{return walkingDetected;}
+
+int getRunningStatus()
+{return runningDetected;}
+
+int getPosition()
+{return position;}
+//********************** end properties *************************************
+
+
 
 
 

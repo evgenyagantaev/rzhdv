@@ -82,7 +82,11 @@ int detectWalking;
 
 void movementDetection(void);
 
-
+//************************ properties ***************************************
+int getWalkingStatus();
+int getRunningStatus();
+int getPosition();
+//********************** end properties *************************************
 
 
 
