@@ -29,12 +29,13 @@ void add_acc_samples(int16_t x, int16_t y, int16_t z)
 	averaging_y_buffer[ACC_BUFFER_LENGTH-1] = y;
 	averaging_z_buffer[ACC_BUFFER_LENGTH-1] = z;
 
-	char message[64];  // remove when not debugging
-	sprintf(message, "%dI%d\r\n", averaging_x_buffer[ACC_BUFFER_LENGTH-1], averaging_x_buffer[ACC_BUFFER_LENGTH-1]);
-	HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
+	//debug
+	//char message[64];  // remove when not debugging
+	//sprintf(message, "%dI%d\r\n", averaging_x_buffer[ACC_BUFFER_LENGTH-1], averaging_x_buffer[ACC_BUFFER_LENGTH-1]);
+	//HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
 
 	//debug
-	//*
+	/*
 	if((GPIOB->IDR & GPIO_PIN_0) == GPIO_PIN_RESET)
 		GPIOB->BSRR = (uint32_t)GPIO_PIN_0;
 	else

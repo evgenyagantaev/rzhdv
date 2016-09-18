@@ -8,6 +8,10 @@
 #include "movement_detector_obj.h"
 #include "timer250hz.h"
 #include "timer_1hz_obj.h"
+#include "math.h"
+//debug
+#include "usart.h"
+extern UART_HandleTypeDef huart1;
 
 
 //********************* private functions **********************************
@@ -179,10 +183,16 @@ void movementDetection(void)
   // детектируем шаг/бег
   //*****************************************************************************
 
-  newX = averagingXbuffer[ACCELBUFFERLENGTH - 1];
-//*
-  if((abs(newX-meanXlevel) > runThreshold) && !runStepDetected)
-  {
+    newX = averagingXbuffer[ACCELBUFFERLENGTH - 1];
+    // debug
+	char message[64];  // remove when not debugging
+	sprintf(message, "%dI%d\r\n", abs(newX-meanX), abs(newX-meanX));
+	HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
+    //*
+	if((abs(newX-meanX) > runThreshold) && !runStepDetected)
+	{
+
+
 		if((timer250hz_get_tick() - lastRunStepTimerMarker) > runStepInterval)
 		{
 				runStepCounter++;
@@ -191,10 +201,9 @@ void movementDetection(void)
 				detectWalking = 0;
 
 				//debug (blue marker)
-				//sprintf(sampleTxtBuffer, "B\r\n");
-				//xSemaphoreTake(uartMutex, portMAX_DELAY);
-				//uart->sendMessage(sampleTxtBuffer);
-				//xSemaphoreGive(uartMutex);
+				sprintf(message, "B\r\n");
+				HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
+
 		}
 
 		runStepDetected = 1;
@@ -210,14 +219,14 @@ void movementDetection(void)
 		}
 
 
-  }
+	}
   //else if(abs(newX - meanXlevel) <= noMovementThreshold)
-  else if((newX - meanXlevel) <= noMovementThreshold)
+  else if((newX - meanX) <= noMovementThreshold)
 		runStepDetected = 0;
 
   if(detectWalking)	// если не детектирован беговой шаг, детектируем пеший шаг
   {
-		if((abs(newX-meanXlevel) > walkThreshold) && !walkStepDetected)
+		if((abs(newX-meanX) > walkThreshold) && !walkStepDetected)
 		{
 				if((timer250hz_get_tick() - lastStepTimerMarker) > stepInterval)
 				{
@@ -226,10 +235,9 @@ void movementDetection(void)
 					noLocomotionMarker = timer1hz_get_tick();
 
 					//debug (white marker)
-					//sprintf(sampleTxtBuffer, "W\r\n");
-					//xSemaphoreTake(uartMutex, portMAX_DELAY);
-					//uart->sendMessage(sampleTxtBuffer);
-					//xSemaphoreGive(uartMutex);
+					sprintf(sampleTxtBuffer, "W\r\n");
+					HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
+
 				}
 				walkStepDetected = 1;
 				lastStepTimerMarker = timer250hz_get_tick();
@@ -237,7 +245,7 @@ void movementDetection(void)
 
 		}
 		//else if(abs(newX-meanXlevel) <= noMovementThreshold)
-		else if((newX-meanXlevel) <= noMovementThreshold)
+		else if((newX-meanX) <= noMovementThreshold)
 				walkStepDetected = 0;
   }
 
@@ -266,8 +274,6 @@ void movementDetection(void)
 		{
 				walkingDetected = 0;
 				walkStepCounter = 0;
-				//debug
-				//printf("A%d=%d=%d\r\n", positionCalculating.walkStepCounter, positionCalculating.walkingDetected, common.position);
 		}
   }
   else if((runStepCounter < numberOfStepsToDetect) && runningDetected)

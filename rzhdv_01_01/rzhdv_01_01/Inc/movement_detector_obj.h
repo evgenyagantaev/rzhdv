@@ -80,7 +80,7 @@ int detectWalking;
 
 //*********************** end variables ************************************
 
-
+void movementDetection(void);
 
 
 
