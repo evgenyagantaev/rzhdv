@@ -28,9 +28,12 @@ void heart_rate_calculation_task()
 		// debug
 		if(new_rr_interval != 0)
 		{
+			//debug
+			/*
 			char message[64];  // remove when not debugging
 			sprintf(message, "c1p%03dm5t366r0014G\r\n", get_current_heartrate());
 			HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
+			//*/
 		}
 		//*/
 	}

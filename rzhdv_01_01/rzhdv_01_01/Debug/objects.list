@@ -48,6 +48,8 @@
 "Src/adc.o"
 "Src/configure_adas1000.o"
 "Src/crc.o"
+"Src/diagnost_obj.o"
+"Src/diagnostics_task.o"
 "Src/ecg_ring_buffer.o"
 "Src/ecg_ring_buffer_task.o"
 "Src/frame_ring_buffer.o"

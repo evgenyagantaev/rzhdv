@@ -10,6 +10,11 @@
 #include "frame_ring_buffer.h"
 #include "isoline.h"
 
+//debug
+#include "usart.h"
+extern UART_HandleTypeDef huart1;
+
+
 void ecg_ring_buffer_task()
 {
 	char message[64];
@@ -20,6 +25,11 @@ void ecg_ring_buffer_task()
 		uint32_t sample = local_frame_copy[1]&((uint32_t)0x00ffffff);
 		ecg_ring_buffer_push(sample);
 		isoline_add_new_sample(sample);
+
+		// debug
+		char message[64];  // remove when not debugging
+		sprintf(message, "%dI%d\r\n", sample, sample);
+		HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
 
 	}
 }

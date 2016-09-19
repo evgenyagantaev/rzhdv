@@ -12,6 +12,8 @@ C_SRCS += \
 ../Src/adc.c \
 ../Src/configure_adas1000.c \
 ../Src/crc.c \
+../Src/diagnost_obj.c \
+../Src/diagnostics_task.c \
 ../Src/ecg_ring_buffer.c \
 ../Src/ecg_ring_buffer_task.c \
 ../Src/frame_ring_buffer.c \
@@ -54,6 +56,8 @@ OBJS += \
 ./Src/adc.o \
 ./Src/configure_adas1000.o \
 ./Src/crc.o \
+./Src/diagnost_obj.o \
+./Src/diagnostics_task.o \
 ./Src/ecg_ring_buffer.o \
 ./Src/ecg_ring_buffer_task.o \
 ./Src/frame_ring_buffer.o \
@@ -96,6 +100,8 @@ C_DEPS += \
 ./Src/adc.d \
 ./Src/configure_adas1000.d \
 ./Src/crc.d \
+./Src/diagnost_obj.d \
+./Src/diagnostics_task.d \
 ./Src/ecg_ring_buffer.d \
 ./Src/ecg_ring_buffer_task.d \
 ./Src/frame_ring_buffer.d \

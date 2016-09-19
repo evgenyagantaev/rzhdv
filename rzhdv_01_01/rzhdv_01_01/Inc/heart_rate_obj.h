@@ -32,6 +32,7 @@ static int new_regular_heart_rate_ready_flag = 0;
 void heart_rate_init();
 
 int get_current_heartrate();
+void heart_rate_set_asystoly();
 void hr_set_new_rr_interval(uint32_t interval);
 void heart_rate_calculate(void);
 

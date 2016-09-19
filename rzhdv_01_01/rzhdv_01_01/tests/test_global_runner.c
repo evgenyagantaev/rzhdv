@@ -53,6 +53,7 @@
 #include "qrs_detection_task.h"
 #include "heart_rate_obj.h"
 #include "heart_rate_calculation_task.h"
+#include "diagnost_obj.h"
 // here code to test
 //#include "ProductionCode.h"
 
@@ -238,6 +239,7 @@ int main(void)
 	heart_rate_init();
 	smb380_write_settings();
 	movement_detector_initialization();
+	diagnost_init();
 
 	timer1hz_start();
 	timer100hz_start();
@@ -252,6 +254,7 @@ int main(void)
         heart_rate_calculation_task();
 		acc_data_read_task();
 		movement_detection_task();
+		diagnosticsTask();
     }
     //return (UnityEnd());
 }

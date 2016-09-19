@@ -8,6 +8,8 @@
 #ifndef INC_DIAGNOSTICS_TASK_H_
 #define INC_DIAGNOSTICS_TASK_H_
 
+#include "stdint.h"
+
 # define STATUSSTRINGLENGTH 128
 
 

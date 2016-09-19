@@ -42,7 +42,7 @@ int redCounter;
 int state, previousState;
 
 // interval of diagnostics information output (in seconds)
-long DIAGNOSTICSINTERVAL;
+static long DIAGNOSTICSINTERVAL = 2;
 
 // flag that indicates that recreation period after walking or running
 // not finished yet
@@ -74,8 +74,6 @@ long badAdcRangeMarker;
 
 //*********************** end variables ************************************
 
-
-public://***********************************************************************
 
 static const uint16_t LOWBOUNDADCDIAPAZONE = 500;
 static const uint16_t UPPERBOUNDADCDIAPAZONE = 65500;

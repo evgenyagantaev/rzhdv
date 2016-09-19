@@ -16,14 +16,17 @@ void heart_rate_init()
 
 	for(i=0; i<BUFFER_LENGTH; i++)
 		regular_heart_rate_buffer[i] = 75;
-
-
 }
 
 
 int get_current_heartrate()
 {
 	return current_heartrate;
+}
+
+void heart_rate_set_asystoly()
+{
+	current_heartrate = 0;
 }
 
 void hr_set_new_rr_interval(uint32_t interval)

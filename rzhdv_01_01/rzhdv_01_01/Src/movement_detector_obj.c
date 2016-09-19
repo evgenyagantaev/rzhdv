@@ -187,7 +187,7 @@ void movementDetection(void)
     // debug
 	char message[64];  // remove when not debugging
 	sprintf(message, "%dI%d\r\n", abs(newX-meanX), abs(newX-meanX));
-	HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
+	//HAL_UART_Transmit(&huart1, (uint8_t *)message, strlen(message), 500);  // for production board
     //*
 	if((abs(newX-meanX) > runThreshold) && !runStepDetected)
 	{

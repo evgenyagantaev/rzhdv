@@ -37,7 +37,7 @@ void timer1hz_start(void)
 void timer1hz_increment_tick()
 {
     timer1hz_tick++;
-    HAL_GPIO_TogglePin(GPIOA, green_led_odrain_Pin);
+    //HAL_GPIO_TogglePin(GPIOA, green_led_odrain_Pin);
 
     //debug
 	/*

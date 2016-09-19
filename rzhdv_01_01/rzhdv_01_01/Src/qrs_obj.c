@@ -11,14 +11,11 @@
 
 #include "qrs_obj.h"
 #include "ecg_ring_buffer.h"
+#include "heart_rate_obj.h"
 
 //debug
 #include "usart.h"
 extern UART_HandleTypeDef huart1;
-
-
-
-
 
 
 void qrs_add_new_sample(int32_t new_sample)
@@ -40,6 +37,9 @@ void qrs_add_new_sample(int32_t new_sample)
 	 if(qrs_buffer_counter >= QRSWINDOWLENGTH)
 		 local_buffer_ready_flag = 1;
 	}
+
+	// inkrementiruem schetchik asistolii, kotoryi obnulyaetsya kazhdyi raz, kogda detektirovan qrs-kompleks
+	asystolyShiftCounter++;
 }
 
 void qrs_add_new_isoline(int32_t isoline_value)
@@ -129,11 +129,11 @@ void qrsDetect(void)
 			qrs_buffer_counter = 0;
 
 			// if no qrs more than 4 seconds, then we detect asistoly
-			/*
+			//*
 			if(asystolyShiftCounter >= 1000)
 			{
-			   if(common.heartRate != 444) // there was real pulse yet
-				  common.heartRate = 0;
+			   if(get_current_heartrate() != 444) // there was real pulse yet
+				   heart_rate_set_asystoly();
 			}
 			//*/
 		}
@@ -214,7 +214,7 @@ void qrsDetect(void)
 			//*/
 
 			// reset of asystoly counter
-			//asystolyShiftCounter = 0;
+			asystolyShiftCounter = 0;
 
 			// drop buffer
 			local_buffer_ready_flag = 0;

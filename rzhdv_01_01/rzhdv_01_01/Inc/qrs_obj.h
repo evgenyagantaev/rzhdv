@@ -62,6 +62,9 @@ static int local_buffer_ready_flag;
 // local buffer counter; counts number of samples in local buffer
 static int qrs_buffer_counter;
 
+// asystoly shift counter
+static int asystolyShiftCounter = 0;
+
 
 
 void qrs_add_new_sample(int32_t new_sample);
