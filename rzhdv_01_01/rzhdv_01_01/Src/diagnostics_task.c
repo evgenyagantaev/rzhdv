@@ -8,6 +8,7 @@
 #include "diagnostics_task.h"
 #include "timer_1hz_obj.h"
 #include "heart_rate_obj.h"
+#include "thermometr_obj.h"
 
 //debug
 #include "usart.h"
@@ -15,6 +16,7 @@ extern UART_HandleTypeDef huart1;
 
 //debug
 #include "gpio.h"
+#include "leadoff_status_obj.h"
 
 
 // This task performs diagnostics
@@ -117,7 +119,7 @@ void diagnosticsTask(void *parameters)
 
 		int motion = getPosition();
 		int respiration = 17;
-		int temperature = 366;
+		int temperature = get_current_temperature();
 
 		// current format of status string: "c%dp%03dm%dt%03dr%03dG"
 
@@ -192,6 +194,9 @@ void diagnosticsTask(void *parameters)
 
 			//if(common.sendStatus)
 			{
+				HAL_UART_Transmit(&huart1, (uint8_t *)statusString, strlen(statusString), 500);  // for production board
+				//debug
+				sprintf(statusString, "c  0x%x  G\r\n", get_leadoff_status());
 				HAL_UART_Transmit(&huart1, (uint8_t *)statusString, strlen(statusString), 500);  // for production board
 			}
 		}

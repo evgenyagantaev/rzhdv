@@ -54,6 +54,13 @@
 #include "heart_rate_obj.h"
 #include "heart_rate_calculation_task.h"
 #include "diagnost_obj.h"
+#include "movement_detector_obj.h"
+#include "smb380.h"
+#include "movement_detection_task.h"
+#include "diagnostics_task.h"
+#include "temperature_measure_task.h"
+
+
 // here code to test
 //#include "ProductionCode.h"
 
@@ -254,6 +261,7 @@ int main(void)
         heart_rate_calculation_task();
 		acc_data_read_task();
 		movement_detection_task();
+		temperature_measure_task();
 		diagnosticsTask();
     }
     //return (UnityEnd());

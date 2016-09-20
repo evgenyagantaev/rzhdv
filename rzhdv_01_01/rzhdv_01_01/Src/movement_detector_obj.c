@@ -320,39 +320,39 @@ void movementDetection(void)
 		 {
 				 if(meanZ<0)
 				 {
-						 // face down
-						 position = 1;
+					 // right side
+					 position = 3;
 				 }
 				 else
-						 {
-						 // face up
-						 position = 2;
+				 {
+					 // left side
+					 position = 4;
 				 }
 		 }
 		 else if((abs(meanY)>abs(meanZ)) && (abs(meanY)>abs(meanX)))
 		 {
 				 if(meanY<0)
 				 {
-						 // left side
-						 position = 3;
+					 // face down
+					 position = 1;
 				 }
 				 else
-						 {
-						 // right side
-						 position = 4;
+				{
+					 // face up
+					 position = 2;
 				 }
 		 }
 		 else if((abs(meanX)>abs(meanZ)) && (abs(meanX)>abs(meanY)))
 		 {
 				 if(meanX<0)
 				 {
-						 // head down
-						 position = 6;
+					 // head up
+					 position = 5;
 				 }
 				 else
-						 {
-						 // head up
-						 position = 5;
+				 {
+					 // head down
+					 position = 6;
 				 }
 		 }
 

@@ -124,6 +124,8 @@ void MX_GPIO_Init(void)
 	/*Configure GPIO pin Output Level */
 	HAL_GPIO_WritePin(GPIOA, td_power_out_Pin|red_led_odrain_Pin|green_led_odrain_Pin|spi1_chipsel_Pin
 						  |reset_adas_Pin|extern_watchdog_Pin, GPIO_PIN_RESET);
+	// turn td power on
+	HAL_GPIO_WritePin(GPIOA, td_power_out_Pin, GPIO_PIN_SET);
 
 	/*Configure GPIO pin Output Level */
 	HAL_GPIO_WritePin(disco_red_led_out_GPIO_Port, disco_red_led_out_Pin, GPIO_PIN_RESET);

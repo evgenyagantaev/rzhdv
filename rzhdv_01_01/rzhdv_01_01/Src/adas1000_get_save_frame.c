@@ -3,6 +3,7 @@
 #include "spi_low_level.h"
 #include "gpio.h"
 
+
 /**
   * @brief EXTI line detection callback.
   * @param GPIO_Pin: Specifies the pins connected EXTI line

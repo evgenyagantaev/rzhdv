@@ -72,9 +72,10 @@ uint32_t configure_adas1000(void)
 		correct_counter++;
 	if(((((uint32_t)ECGCTL_ADDRESS)<<24) | ECGCTL_CONFIG) == configure_register(ECGCTL_ADDRESS, ECGCTL_CONFIG))
 		correct_counter++;
-	/*
+
 	if(((((uint32_t)LOFFCTL_ADDRESS)<<24) | LOFFCTL_CONFIG) == configure_register(LOFFCTL_ADDRESS, LOFFCTL_CONFIG))
 		correct_counter++;
+	/*
 	if(((((uint32_t)RESPCTL_ADDRESS)<<24) | RESPCTL_CONFIG) == configure_register(RESPCTL_ADDRESS, RESPCTL_CONFIG))
 		correct_counter++;
 	*/

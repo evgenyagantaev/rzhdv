@@ -36,6 +36,7 @@
 
 #define LOFFCTL_ADDRESS 0x02
 #define LOFFCTL_RESET (uint32_t)0x000000
+//#define LOFFCTL_CONFIG (uint32_t)0x03f003
 #define LOFFCTL_CONFIG (uint32_t)0x000001
 
 #define RESPCTL_ADDRESS 0x03

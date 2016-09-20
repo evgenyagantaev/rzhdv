@@ -45,7 +45,7 @@
 
 /* USER CODE END Includes */
 
-extern ADC_HandleTypeDef hadc1;
+ADC_HandleTypeDef hadc1;
 
 /* USER CODE BEGIN Private defines */
 

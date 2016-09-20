@@ -25,6 +25,7 @@ C_SRCS += \
 ../Src/isoline.c \
 ../Src/isoline_calculation_task.c \
 ../Src/iwdg.c \
+../Src/leadoff_status_obj.c \
 ../Src/movement_detection_task.c \
 ../Src/movement_detector_obj.c \
 ../Src/putchar.c \
@@ -36,6 +37,8 @@ C_SRCS += \
 ../Src/stm32l4xx_hal_msp.c \
 ../Src/stm32l4xx_hal_timebase_TIM.c \
 ../Src/stm32l4xx_it.c \
+../Src/temperature_measure_task.c \
+../Src/thermometr_obj.c \
 ../Src/tim.c \
 ../Src/timer250hz.c \
 ../Src/timer250hz_irqhandler.c \
@@ -69,6 +72,7 @@ OBJS += \
 ./Src/isoline.o \
 ./Src/isoline_calculation_task.o \
 ./Src/iwdg.o \
+./Src/leadoff_status_obj.o \
 ./Src/movement_detection_task.o \
 ./Src/movement_detector_obj.o \
 ./Src/putchar.o \
@@ -80,6 +84,8 @@ OBJS += \
 ./Src/stm32l4xx_hal_msp.o \
 ./Src/stm32l4xx_hal_timebase_TIM.o \
 ./Src/stm32l4xx_it.o \
+./Src/temperature_measure_task.o \
+./Src/thermometr_obj.o \
 ./Src/tim.o \
 ./Src/timer250hz.o \
 ./Src/timer250hz_irqhandler.o \
@@ -113,6 +119,7 @@ C_DEPS += \
 ./Src/isoline.d \
 ./Src/isoline_calculation_task.d \
 ./Src/iwdg.d \
+./Src/leadoff_status_obj.d \
 ./Src/movement_detection_task.d \
 ./Src/movement_detector_obj.d \
 ./Src/putchar.d \
@@ -124,6 +131,8 @@ C_DEPS += \
 ./Src/stm32l4xx_hal_msp.d \
 ./Src/stm32l4xx_hal_timebase_TIM.d \
 ./Src/stm32l4xx_it.d \
+./Src/temperature_measure_task.d \
+./Src/thermometr_obj.d \
 ./Src/tim.d \
 ./Src/timer250hz.d \
 ./Src/timer250hz_irqhandler.d \

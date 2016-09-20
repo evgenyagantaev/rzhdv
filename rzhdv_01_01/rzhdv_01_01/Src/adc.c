@@ -41,7 +41,6 @@
 
 /* USER CODE END 0 */
 
-ADC_HandleTypeDef hadc1;
 
 /* ADC1 init function */
 void MX_ADC1_Init(void)
@@ -73,8 +72,7 @@ void MX_ADC1_Init(void)
   multimode.Mode = ADC_MODE_INDEPENDENT;
   HAL_ADCEx_MultiModeConfigChannel(&hadc1, &multimode);
 
-    /**Configure Regular Channel 
-    */
+  // Select Channel 7 to be converted (TAO)
   sConfig.Channel = ADC_CHANNEL_7;
   sConfig.Rank = 1;
   sConfig.SamplingTime = ADC_SAMPLETIME_2CYCLES_5;
